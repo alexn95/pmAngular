@@ -1,0 +1,8 @@
+<div class="task">
+  <button mat-raised-button (click)="getTask($event)" color="primary">get task</button>
+  <ul class="task__list">
+    <li class="task__list-item" *ngFor="let task of tasks">
+      {{task.title}}
+    </li>
+  </ul>
+</div>

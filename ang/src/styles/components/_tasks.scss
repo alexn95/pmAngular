@@ -1,0 +1,13 @@
+.task {
+    // background: red;
+
+    &__list {
+        padding: 20px;
+
+        &-item {
+            &:hover {
+                // background-color: #777;
+            }
+        }
+    }
+}
