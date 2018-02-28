@@ -1,3 +1,5 @@
+import { ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from './../services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -12,7 +14,19 @@ import { LoginComponent } from './login/login.component';
 
 import {
   MatButtonModule,
+  MatInputModule,
+  MatDialog,
+  MatDialogRef,
+  MatDialogModule,
+  MatTooltipModule,
+  MatSnackBarModule
 } from '@angular/material';
+
+import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { routing } from './app.routes';
+import { HomeComponent } from './home/home.component';
+import { ProjectsComponent } from './projects/projects.component';
+
 
 
 
@@ -20,16 +34,29 @@ import {
   declarations: [
     AppComponent,
     TasksComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent,
+    ProjectsComponent
   ],
   imports: [
     BrowserModule,
     HttpModule,
+    ReactiveFormsModule,
+    routing,
 
     //MATERIAL
-    MatButtonModule
+    MatButtonModule,
+    MatInputModule,
+    NoopAnimationsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    MatTooltipModule,
+    MatSnackBarModule
   ],
-  providers: [TaskService],
-  bootstrap: [AppComponent]
+  providers: [TaskService, AuthService],
+  bootstrap: [AppComponent],
+  entryComponents: [
+    LoginComponent
+  ]
 })
 export class AppModule { }

@@ -1,0 +1,30 @@
+<div class="login" >
+<form  [formGroup]="loginForm" (ngSubmit)="logIn()" class="login__form">
+  <mat-form-field class="login__form-input"   >
+    <input matInput placeholder="login" name="login" id="login" [formControl]="login" 
+    [errorStateMatcher]="matcher">
+    <mat-hint>Errors appear instantly!</mat-hint>
+    <mat-error *ngIf="login.hasError('required')">
+        Login is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="login.hasError('minlength')">
+        login can not be shorter than 3 characters.
+    </mat-error>
+  </mat-form-field>
+    
+  <mat-form-field class="login__form-input" >
+    <input matInput placeholder="password" type="password" name="password" id="password" [formControl]="password"
+    [errorStateMatcher]="matcher">
+    <mat-hint>Errors appear instantly!</mat-hint>
+    <mat-error *ngIf="password.hasError('required')">
+        Password is <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="password.hasError('minlength')">
+        Password can not be shorter than 3 characters.
+    </mat-error>
+  </mat-form-field>
+    
+  <button type="submit" [disabled]="!loginForm.valid" mat-raised-button  color="primary">log in</button>
+  {{serverError}}
+</form>
+</div>

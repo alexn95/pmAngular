@@ -3,11 +3,10 @@ header("Access-Control-Allow-Origin: http://localhost:4200");
 header("Access-Control-Allow-Methods: GET,POST");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
+include 'MSSConnect.php';
+include 'JWT.php';
 
-$serverName = 'DESKTOP-8OK7H9N\SQLEXPRESS';
-$connectionInfo = array( "Database"=>"pm");
-$conn = sqlsrv_connect( $serverName, $connectionInfo);
-
+$conn = MSSConnect();
 $query = "SELECT * FROM tasks where id = ?";
 $params = array(1, "1");
 $stmt = sqlsrv_query( $conn, $query, $params);

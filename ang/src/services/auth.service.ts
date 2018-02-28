@@ -3,16 +3,18 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/map';
 
 @Injectable()
-export class TaskService {
+export class AuthService {
 
   constructor(
     private http: Http
   ) { }
 
-  public getTasks(): any {
+  public login(login: string, pass: string) : any {
+    let data = new FormData(); 
+    data.append("login", login);
+    data.append("pass", pass); 
     return this.http
-      .post("http://pm/tasks.php", {})
+      .post("http://pm/auth.php", data)
       .map((respons) => respons.json())
   }
-
 }
