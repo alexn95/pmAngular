@@ -1,13 +1,32 @@
-.task {
-    // background: red;
-
-    &__list {
-        padding: 20px;
-
-        &-item {
-            &:hover {
-                // background-color: #777;
+.tasks {
+    // margin: 70px 0 0 0;
+    &__accordin{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 10px;
+        &-panel{
+            // padding: 10px;
+            max-width: 1000px ;
+            width: 100%;
+            &-item{
+                display: inline-flex;
+                align-items: center;
             }
+            &-desc{
+
+            }
+            &-info{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            &-button{
+                margin: 0 100px 0 100px;
+            }
+           
         }
     }
 }

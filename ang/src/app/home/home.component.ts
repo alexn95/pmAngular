@@ -8,18 +8,7 @@ import { LoginComponent } from '../login/login.component';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public loginModal : MatDialog ) {}
-
-  public openLoginModal() : void{
-    let loginRef = this.loginModal.open(LoginComponent,{
-      width : '500px',
-      data: {}
-    });
-
-    loginRef.afterClosed().subscribe(result =>{
-      console.log('closed')
-    })
-  }
+  constructor( ) {}
 
   ngOnInit() {
   }

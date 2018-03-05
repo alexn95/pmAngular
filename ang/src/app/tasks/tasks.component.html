@@ -1,9 +1,31 @@
-<div class="task">
-  <button mat-raised-button (click)="getTask($event)" color="primary">get task</button>
-  <ul class="task__list">
-    <li class="task__list-item" *ngFor="let task of tasks">
-      {{task.id}} 
-      {{task.title}}
-    </li>
-  </ul>
+<div class="tasks">
+  <!-- <button mat-raised-button (click)="getItems($event)" color="primary">get task</button> -->
+
+  <mat-accordion class="tasks__accordin" displayMode="default" [multi]="true" [hideToggle]="false"  *ngFor="let task of tasks">
+    <mat-expansion-panel class="tasks__accordin-panel" [hideToggle]="false" #panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title class="tasks__accordin-panel-item">
+            {{task.title}}
+          </mat-panel-title>
+          <mat-panel-description class="tasks__accordin-panel-item">
+            {{task.type}}
+          </mat-panel-description>
+          <mat-panel-description class="tasks__accordin-panel-item">
+            <a href="/" mat-button>{{task.project_title}}</a>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <p class="tasks__accordin-panel-desc"> {{task.description}} </p>
+        <p class="tasks__accordin-panel-info"> 
+          <span>{{task.login}} </span>
+          <span>{{task.task_state}} </span>
+        </p>    
+        <mat-action-row >
+          <button  mat-button (click)="editTask(task)" color="primary">Edit</button>
+          <button  mat-button (click)="panel.expanded = false" color="primary">Close</button>
+        </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+
 </div>
+
+

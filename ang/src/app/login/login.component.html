@@ -10,7 +10,7 @@
     <mat-error *ngIf="login.hasError('minlength')">
         login can not be shorter than 3 characters.
     </mat-error>
-  </mat-form-field>
+  </mat-form-field> 
     
   <mat-form-field class="login__form-input" >
     <input matInput placeholder="password" type="password" name="password" id="password" [formControl]="password"
@@ -23,8 +23,10 @@
         Password can not be shorter than 3 characters.
     </mat-error>
   </mat-form-field>
-    
-  <button type="submit" [disabled]="!loginForm.valid" mat-raised-button  color="primary">log in</button>
-  {{serverError}}
-</form>
+   <div class="login__form-action-row">
+        <button class="login__form-action-row-button" type="submit" [disabled]="!loginForm.valid" mat-raised-button  color="primary">log in</button>
+        <button type="button" mat-button class="login__form-action-row-button" (click)="signup()"  color="primary">sign up</button>      
+   </div> 
+  </form>
+
 </div>

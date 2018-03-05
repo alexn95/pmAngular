@@ -1,0 +1,26 @@
+.toolbar{
+    &__space{
+        flex: 1 1 auto;
+    }
+    padding: 0px;
+    margin: 0px;
+    
+    &__button{
+        padding: 10px; 
+        font-size: 16px;  
+    } 
+
+    &__project-title{
+        font-size: 16px;
+    }
+
+    &__home_icon{
+        padding: 10px 10px 10px 0px;
+    }
+
+    @media (max-width: 400px) {
+        .toolbar__project-title{
+            display: block;
+        }
+    }
+}

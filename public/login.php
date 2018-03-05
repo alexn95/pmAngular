@@ -11,28 +11,30 @@ $conn = MSSConnect();
 $login = $_POST['login'];
 $pass = $_POST['pass'];
 
-$query = "DECLARE @id INT;
+$query = "DECLARE @id INT, @status BIT;
         EXECUTE auth ?, ?,
-        @id = @id OUTPUT;
-        SELECT @id id;";
+        @id = @id OUTPUT,
+        @status = @status OUTPUT;;
+        SELECT @id id, @status status;";
 $params = array($login, $pass);
 $stmt = sqlsrv_query( $conn, $query, $params);
 if( $stmt === false ) {
     die( print_r( sqlsrv_errors(), true));
 }
 
-$data = sqlsrv_fetch_array($stmt);
-$result = array();
-$result["id"] = $data[0];
-if ($data[0] != null){
+$data = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC);
+$result["status"] = $data["status"]; 
+
+if ($result["status"]){
+    $result['id'] = $data["id"];
+    $result['login'] = $login;
     $key = "pm_JWT_secret_key";
     $token = array(
-        "id" => $data[0]
+        "id" => $data['id'],
+        "login" => $login
     );
     $encodeToken = JWT::encode($token, $key);
     $result["token"] = $encodeToken;
-    // $decodeToken = JWT::decode($encodeToken, $key, array('HS256'));
-    // $result["token1"] = $decodeToken;
 }  
 $jsonData = json_encode($result);
 echo($jsonData);
