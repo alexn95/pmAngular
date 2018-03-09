@@ -1,4 +1,6 @@
 <div class="main">
         <app-toolbar></app-toolbar>
-        <router-outlet></router-outlet>        
+        <router-outlet *ngIf="isShowMainPage()"></router-outlet>
+        <app-guest-page *ngIf="isShowGuestPage()"></app-guest-page>
 </div>
+ 

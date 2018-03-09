@@ -33,7 +33,10 @@ import {
   MatExpansionModule,
   MatDividerModule,
   MatDivider,
-  MatSelectModule
+  MatSelectModule,
+  MatMenuModule,
+  MatSidenavModule,
+  MatCheckboxModule
 } from '@angular/material';
 
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -42,9 +45,9 @@ import { HomeComponent } from './home/home.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { IsAuthorized } from '../models/is-authorized';
-import { PermissionErrorComponent } from './permission-error/permission-error.component';
 import { TaskEditComponent } from './task-edit/task-edit.component';
-import { ModalService } from '../services/modal.service';
+import { GuestPageComponent } from './guest-page/guest-page.component';
+
 
 @NgModule({
   declarations: [
@@ -54,9 +57,9 @@ import { ModalService } from '../services/modal.service';
     HomeComponent,
     ProjectsComponent,
     ToolbarComponent,
-    PermissionErrorComponent,
     TaskEditComponent,
-    SignupComponent
+    SignupComponent,
+    GuestPageComponent
   ],
   imports: [
     BrowserModule,
@@ -81,14 +84,18 @@ import { ModalService } from '../services/modal.service';
     MatExpansionModule,
     MatDividerModule,
     MatSelectModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatCheckboxModule
     
   ],
-  providers: [TaskService, AuthService, ModalService, HttpService, IsAuthorized],
+  providers: [TaskService, AuthService,  HttpService, IsAuthorized],
   bootstrap: [AppComponent],
   entryComponents: [
     LoginComponent,
     SignupComponent,
-    TaskEditComponent
+    TaskEditComponent,
+    ProjectsComponent,
   ]
 })
 export class AppModule { }

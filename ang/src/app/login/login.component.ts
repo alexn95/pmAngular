@@ -1,3 +1,4 @@
+import { SignupComponent } from './../signup/signup.component';
 import { ToolbarComponent } from './../toolbar/toolbar.component';
 import { MatDialog, MatDialogRef, MatSnackBar } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
@@ -5,7 +6,6 @@ import { FormGroup, FormControl, FormBuilder, ReactiveFormsModule, Validators  }
 import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
 import { FormErrorStateMatcher } from '../../models/form-error-state-matcher';
-import { ModalService } from '../../services/modal.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
     private router : Router,
     private dialogRef : MatDialogRef<LoginComponent>,
     private snackBar : MatSnackBar,
-    private modal : ModalService
+    private modal : MatDialog
   ) { }
 
   ngOnInit() {}
@@ -48,13 +48,13 @@ export class LoginComponent implements OnInit {
         this.snackBar.open("Login or password is not valid.", "close", {
           duration: 3000,
         }); 
-      } else {
+      } else if (result["status"] == 1)  {
         localStorage.setItem("userStatus", "authorized")
         localStorage.setItem("token", result["token"])
         localStorage.setItem("id", result["id"])
         localStorage.setItem("login", result["login"])
         this.dialogRef.close()
-        this.router.navigate(["tasks"]);
+        this.router.navigate(['/'])
         this.snackBar.open("You are authorized.", "close", {
           duration: 3000,
         }); 
@@ -65,7 +65,10 @@ export class LoginComponent implements OnInit {
 
   private signup(){
     this.dialogRef.close()
-    this.modal.regitrationModal();
+    this.modal.open(SignupComponent,{
+      width : '500px',
+      data: {}
+    });
   }
 
 }

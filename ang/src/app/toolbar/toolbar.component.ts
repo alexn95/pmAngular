@@ -1,44 +1,71 @@
-import { ModalService } from './../../services/modal.service';
+import { Router } from '@angular/router';
+import { IsAuthorized } from './../../models/is-authorized';
+import { SignupComponent } from './../signup/signup.component';
+
 import { AuthService } from './../../services/auth.service';
 import { LoginComponent } from './../login/login.component';
 import { MatDialog } from '@angular/material';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html'
 })
-export class ToolbarComponent {
- 
-  private userAction : String ;
+export class ToolbarComponent implements OnInit {
 
-  constructor(public modal : ModalService,
-              public auth : AuthService ) {
-    this.changeUserAction();
+  private icon = "account_circle";
+  private userAction = "Login";
+  private userActionIcon = "input"
+  private projectsAction = "open projects"
+  
+  constructor(private modal : MatDialog,
+              private auth : AuthService,
+             ) {
    }
 
-   public changeUserStatus() : void{
-    if (localStorage.getItem('userStatus') == 'authorized'){
-      this.logout()
+  ngOnInit() {
+    this.initUserAction()
+  }
+
+  private changeUserStatus() : void{
+    this.auth.isAuthorized() ? this.logout() : this.login()
+  }
+  
+  private isShowProjectToogle(){
+    return this.auth.isAuthorized();
+  }
+  
+  private initUserAction(){
+    if (this.auth.isAuthorized() ){
+      this.userAction = "Log out";
+      this.userActionIcon = "exit_to_app"
     } else {
-      this.login()
+      this.userAction = "Log in";
+      this.userActionIcon = "input"
     }
   }
 
-  public login(){
-    this.modal.loginModal().afterClosed().subscribe(result =>{
+  private login(){
+    this.modal.open(LoginComponent,{
+      width : '500px',
+      data: {}
+    }).afterClosed().subscribe(result =>{
       console.log('closed')
-      this.changeUserAction();
     })
   }
 
-  public logout(){
+  private logout(){
     this.auth.logout()
-    this.changeUserAction();
   }
 
-  public changeUserAction() {
-    localStorage.getItem('userStatus') == 'authorized' ? this.userAction = 'Logout' : this.userAction = 'Login' 
+  private signup(){
+    this.modal.open(SignupComponent,{
+      width : '500px',
+      data: {}
+    }).afterClosed().subscribe(result =>{
+      console.log('closed')
+    })
   }
+
 
 }

@@ -1,10 +1,11 @@
+import { Router } from '@angular/router';
 import { FormErrorStateMatcher } from './../../models/form-error-state-matcher';
-import { ModalService } from './../../services/modal.service';
 import { AuthService } from './../../services/auth.service';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { MatDialogRef, MatSnackBar } from '@angular/material';
+import { MatDialogRef, MatSnackBar, MatDialog } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
 import {  confirmPasswordValidator} from '../validators/confirm.password.validation';
+import { LoginComponent } from '../login/login.component';
 
 @Component({
   selector: 'app-signup',
@@ -19,7 +20,7 @@ export class SignupComponent implements OnInit {
     private builder: FormBuilder,
     private auth : AuthService,
     private snackBar : MatSnackBar,
-    // private modal : ModalService
+    private modal : MatDialog
   ) { } 
 
   ngOnInit() {
@@ -46,7 +47,22 @@ export class SignupComponent implements OnInit {
 
   private signup(){
     this.auth.signup(this.login.value, this.password.value).subscribe(result => {
-      
+      console.log(result)
+      if (result["status"] == 0){
+        this.snackBar.open("Login already exist.", "close", {
+          duration: 3000,
+        }); 
+      } else if (result["status"] == 1) {
+        this.dialogRef.close()
+        this.modal.open(LoginComponent,{
+          width : '500px',
+          data: {}
+        });
+        this.snackBar.open("Your account was created.", "close", {
+          duration: 3000,
+        }); 
+      }
+    })
   }
 
 }
