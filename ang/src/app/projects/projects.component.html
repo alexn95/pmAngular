@@ -1,1 +1,40 @@
-Projects
+<div class="projects">
+    <div class="projects__panel">
+        <button mat-icon-button (click)="createProject()">
+            <mat-icon color="primary"  matTooltip="Create project"  matTooltipPosition="above">note_add</mat-icon>
+        </button>
+    </div>
+    <mat-accordion class="projects__accordin" displayMode="default" [multi]="true" [hideToggle]="false"  
+    *ngFor="let project of projects">
+    <mat-expansion-panel class="projects__accordin-panel" [hideToggle]="false" #panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title class="projects__accordin-panel-item">
+                {{project.title}}
+            </mat-panel-title>
+            <mat-panel-description class="tasks__accordin-panel-item">
+                {{project.project_state}}
+            </mat-panel-description>
+
+        </mat-expansion-panel-header>
+        <p class="tasks__accordin-panel-desc"> {{project.description}} </p>
+        <mat-panel-description class="tasks__accordin-panel-date">
+            {{project.create_date.date | date: 'short'}}
+        </mat-panel-description>
+
+        <mat-action-row > 
+            <button mat-icon-button (click)="createTask(project)" >
+                <mat-icon color="primary" matTooltip="Create task" matTooltipPosition="above">note_add</mat-icon>
+            </button>
+            <button mat-icon-button (click)="editProject(project)" >
+                <mat-icon color="primary" matTooltip="Edit" matTooltipPosition="above">mode_edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteProject(project)">
+                <mat-icon color="warn"  matTooltip="Delete"  matTooltipPosition="above">delete_forever</mat-icon>
+            </button>
+            <button mat-icon-button (click)="panel.expanded = false">
+                <mat-icon color="primary"  matTooltip="Close"  matTooltipPosition="above">clear</mat-icon>
+            </button>
+        </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion> 
+</div>

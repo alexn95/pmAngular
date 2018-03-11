@@ -1,15 +1,27 @@
-.example-container {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-  }
-  
-  .example-events {
-    width: 300px;
-    height: 200px;
-    overflow: auto;
-    border: 1px solid #555;
-  }
-  
+.projects {
+    &__accordin{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 10px;
+        &-panel{
+            max-width: 400px ;
+            width: 100%;
+            &-item{
+                display: inline-flex;
+                align-items: center;
+            }
+            &-info{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+            &-button{
+                margin: 0 100px 0 100px;
+            }
+           
+        }
+    }
+}

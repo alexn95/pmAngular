@@ -6,6 +6,7 @@ import { AuthService } from './../../services/auth.service';
 import { LoginComponent } from './../login/login.component';
 import { MatDialog } from '@angular/material';
 import { Component, OnInit } from '@angular/core';
+import { SidenavService } from '../../services/sidenav.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -16,10 +17,11 @@ export class ToolbarComponent implements OnInit {
   private icon = "account_circle";
   private userAction = "Login";
   private userActionIcon = "input"
-  private projectsAction = "open projects"
+  private projectsAction = "Close projects"
   
   constructor(private modal : MatDialog,
               private auth : AuthService,
+              private sidenavService : SidenavService,
              ) {
    }
 
@@ -65,6 +67,11 @@ export class ToolbarComponent implements OnInit {
     }).afterClosed().subscribe(result =>{
       console.log('closed')
     })
+  }
+
+  private toggleNav(){
+    this.sidenavService.sidenav.toggle();
+    this.projectsAction = this.sidenavService.sidenav.opened ?  "Close projects" : "Open projects"
   }
 
 

@@ -9,17 +9,14 @@ include 'services/tasksQueries.php';
 
 if (!isValidToken($_POST)){
     echo(json_encode(false));
-    return;
+    return false;
 } 
 
-$conn = MSSConnect();
-$result[] = getTaskStates($conn);
-$result[] = getProjectUsers($conn, $_POST['projId']);
 
-$jsonData = json_encode($result);
+$conn = MSSConnect();
+deleteTask($conn, $_POST['taskId']);
+
+$jsonData = json_encode(true);
 echo($jsonData);
 sqlsrv_close($conn);
 
-
-
-   

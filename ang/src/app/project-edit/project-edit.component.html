@@ -1,0 +1,42 @@
+<div class="project-edit">
+  <form [formGroup]="projectEditForm" (ngSubmit)="save()" class="project-edit__form">
+        <mat-form-field class="project-edit__form-input">
+            <input matInput placeholder="Title" name="title" id="title" [formControl]="title" 
+            [errorStateMatcher]="matcher">
+            <mat-error *ngIf="title.hasError('required')">
+                Title is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="title.hasError('minlength')">
+                Title can not be shorter than 3 characters.
+            </mat-error>
+            <mat-error *ngIf="title.hasError('maxlength')">
+                Title can not be longer than 50 characters.
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field class="project-edit__form-input" >
+          <mat-select placeholder="State" name="state" id="state" [formControl]="state" >
+              <mat-option *ngFor="let state of stateTypes" [value]="state">
+                  {{ state }}
+              </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="project-edit__form-textarea">
+            <textarea matInput placeholder="Description" matTextareaAutosize matAutosizeMinRows="1"
+                      matAutosizeMaxRows="8" name="description" id="description" [formControl]="description"
+                      [errorStateMatcher]="matcher"></textarea>
+            <mat-error *ngIf="description.hasError('minlength')">
+                Description can not be shorter than 3 characters.
+            </mat-error>
+            <mat-error *ngIf="description.hasError('maxlength')">
+                Description can not be longer than 200 characters.
+            </mat-error>
+        </mat-form-field>
+             
+      <div class="project-edit__form-buttons">
+        <button mat-button type="submit" [disabled]="!projectEditForm.valid"  color="primary">Save</button>
+        <button mat-button type="button" (click)="cancel()"  color="warn">Cancel</button>
+      </div>
+      
+  </form>
+</div>

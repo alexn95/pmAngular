@@ -1,3 +1,4 @@
+import { ProjectsService } from './../services/projects.service';
 import { SignupComponent } from './signup/signup.component';
 import { HttpService } from './../services/http.service';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -47,6 +48,12 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { IsAuthorized } from '../models/is-authorized';
 import { TaskEditComponent } from './task-edit/task-edit.component';
 import { GuestPageComponent } from './guest-page/guest-page.component';
+import { SidenavService } from '../services/sidenav.service';
+import { ProjectEditComponent } from './project-edit/project-edit.component';
+import { TaskDeleteComponent } from './task-delete/task-delete.component';
+import { ProjectDeleteComponent } from './project-delete/project-delete.component';
+import { TaskCreateComponent } from './task-create/task-create.component';
+import { ProjectCreateComponent } from './project-create/project-create.component';
 
 
 @NgModule({
@@ -59,7 +66,12 @@ import { GuestPageComponent } from './guest-page/guest-page.component';
     ToolbarComponent,
     TaskEditComponent,
     SignupComponent,
-    GuestPageComponent
+    GuestPageComponent,
+    ProjectEditComponent,
+    TaskDeleteComponent,
+    ProjectDeleteComponent,
+    TaskCreateComponent,
+    ProjectCreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -89,13 +101,25 @@ import { GuestPageComponent } from './guest-page/guest-page.component';
     MatCheckboxModule
     
   ],
-  providers: [TaskService, AuthService,  HttpService, IsAuthorized],
+  providers: [
+    TaskService, 
+    AuthService,  
+    HttpService, 
+    IsAuthorized, 
+    SidenavService,
+    ProjectsService,
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     LoginComponent,
     SignupComponent,
+    TaskCreateComponent,
     TaskEditComponent,
+    TaskDeleteComponent,
     ProjectsComponent,
+    ProjectCreateComponent,
+    ProjectEditComponent,
+    ProjectDeleteComponent,
   ]
 })
 export class AppModule { }

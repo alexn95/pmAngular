@@ -1,19 +1,5 @@
 <?php
-
-function getTaskStates($conn){
-
-    $query = "SELECT id, title FROM task_state";
-    $stmt = sqlsrv_query( $conn, $query);
-    if( $stmt === false ) {
-        die( print_r( sqlsrv_errors(), true));
-    } 
-
-    $states = array(); 
-    while( $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)){
-        $states[] = $row;
-    }
-    return $states;
-}
+ 
 
 function getProjectUsers($conn, $projId){
     $query = "SELECT [users].id, [login] FROM [users]
@@ -43,11 +29,11 @@ function saveEditTask($conn, $data){
         @type = ?,
         @description = ?,
         @userId = ?,
-        @stateId = ?,
+        @state = ?,
         @projectId = ?;
     SELECT @status as status;";
     $params = array($data['taskId'], $data['title'], $data['type'], $data['description'],
-                $data['userId'], $data['stateId'], $data['projId']);
+                $data['userId'], $data['state'], $data['projId']);
     // $query = "{call editTask( ?, ?, ?, ?, ?, ?, ?)}";
 	// $params = [
 	// 	[$data['taskId'], SQLSRV_PARAM_IN, null, SQLSRV_SQLTYPE_INT],
@@ -68,12 +54,36 @@ function saveEditTask($conn, $data){
     return $result;
 }
 
+function saveNewTask($conn, $data){
+    if ($data['userId'] == 'null'){
+        $data['userId'] = null;
+    }
+    $query = "DECLARE @status BIT;
+    EXECUTE @status = createTask
+        @title = ?,
+        @type = ?,
+        @description = ?,
+        @userId = ?,
+        @state = ?,
+        @projectId = ?;
+    SELECT @status as status;";
+    $params = array($data['title'], $data['type'], $data['description'],
+                $data['userId'], $data['state'], $data['projId']);
+    $stmt = sqlsrv_query( $conn, $query, $params );
+    if( $stmt === false ) {
+        die( print_r( sqlsrv_errors(), true));
+    }
+    while (!$result = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)){
+        sqlsrv_next_result($stmt); 
+    }
+    return $result;
+}
+
 function getTasks($conn){
-    $query = "SELECT tasks.id, tasks.title, tasks.description, task_state.title as task_state, tasks.state_id,
-        tasks.type, projects.title as project_title, tasks.project_id, users.login, tasks.user_id FROM tasks
-        LEFT JOIN projects  ON tasks.project_id = projects.id
-        LEFT JOIN users  ON tasks.user_id = users.id
-        LEFT JOIN task_state ON task_state.id = tasks.state_id;";
+    $query = "SELECT tasks.id, tasks.title, tasks.description, tasks.state as task_state, tasks.create_date,
+                tasks.type, projects.title as project_title, tasks.project_id, users.login, tasks.user_id FROM tasks
+                LEFT JOIN projects  ON tasks.project_id = projects.id
+                LEFT JOIN users  ON tasks.user_id = users.id;";
     $stmt = sqlsrv_query( $conn, $query);
     if( $stmt === false ) {
         die( print_r( sqlsrv_errors(), true));
@@ -84,4 +94,12 @@ function getTasks($conn){
         $result[] = $row;
     }
     return $result;
+}
+
+function deleteTask($conn, $taskId){
+    $query = "DELETE FROM tasks WHERE id = ?;";
+    $stmt = sqlsrv_query( $conn, $query, [$taskId]);
+    if( $stmt === false ) {
+        die( print_r( sqlsrv_errors(), true));
+    } 
 }

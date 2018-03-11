@@ -1,14 +1,15 @@
-.permission-error{
+.task-delete{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 15%;
-    &__info{
+    margin: 0 10px 10px 10px;
+    &__text{
         text-align: center;
     }
-    &__login-button{
-        text-align: center;
+    &__buttons{
+        &-button{
+            margin: 0 20px !important;
+        }
     }
-    
 }

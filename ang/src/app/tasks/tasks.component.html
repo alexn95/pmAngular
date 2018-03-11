@@ -1,6 +1,4 @@
 <div class="tasks">
-  <!-- <button mat-raised-button (click)="getItems($event)" color="primary">get task</button> -->
-
   <mat-accordion class="tasks__accordin" displayMode="default" [multi]="true" [hideToggle]="false"  *ngFor="let task of tasks">
     <mat-expansion-panel class="tasks__accordin-panel" [hideToggle]="false" #panel>
         <mat-expansion-panel-header>
@@ -16,15 +14,24 @@
         </mat-expansion-panel-header>
         <p class="tasks__accordin-panel-desc"> {{task.description}} </p>
         <p class="tasks__accordin-panel-info"> 
+          <span class="tasks__accordin-panel-info-dete">{{task.create_date.date | date: 'short'}}</span>
           <span>{{task.login}} </span>
-          <span>{{task.task_state}} </span>
+          <span>{{task.task_state}}</span>    
         </p>    
-        <mat-action-row >
-          <button  mat-button (click)="editTask(task)" color="primary">Edit</button>
-          <button  mat-button (click)="panel.expanded = false" color="primary">Close</button>
+        <mat-action-row > 
+          
+          <button mat-icon-button (click)="editTask(task)" >
+            <mat-icon color="primary" matTooltip="Edit" matTooltipPosition="above">mode_edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="deleteTask(task)">
+            <mat-icon color="warn"  matTooltip="Delete"  matTooltipPosition="above">delete_forever</mat-icon>
+          </button>
+          <button mat-icon-button (click)="panel.expanded = false">
+            <mat-icon color="primary"  matTooltip="Close"  matTooltipPosition="above">clear</mat-icon>
+          </button>
         </mat-action-row>
     </mat-expansion-panel>
-  </mat-accordion>
+  </mat-accordion> 
 
 </div>
 

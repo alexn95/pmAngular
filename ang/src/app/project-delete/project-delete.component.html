@@ -1,0 +1,11 @@
+<div class="project-delete">
+    <p class="project-delete__text">Delete {{project.title}}?</p>
+    <div class="project-delete__buttons">
+      <button class="project-delete__buttons-button" mat-icon-button (click)="delete()" >
+          <mat-icon color="warn">delete_forever</mat-icon>
+      </button>
+      <button class="project-delete__buttons-button" mat-icon-button (click)="cancel()" >
+          <mat-icon color="primary" >clear</mat-icon>
+      </button>
+    </div>
+  </div>

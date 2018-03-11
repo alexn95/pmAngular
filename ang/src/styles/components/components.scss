@@ -1,7 +1,15 @@
-@import './_tasks.scss';
-@import './_login.scss';
-@import './_projects.scss';
 @import './_toolbar.scss';
-@import './_permission-error.scss';
-@import './_task-edit.scss';
+@import './_home.scss';
+
+@import './_login.scss';
 @import './_signup.scss';
+
+@import './_projects.scss';
+@import './_project-create.scss';
+@import './_project-edit.scss';
+@import './_project-delete.scss';
+
+@import './_tasks.scss';
+@import './_task-create.scss';
+@import './_task-edit.scss';
+@import './_task-delete.scss';

@@ -1,5 +1,5 @@
 .tasks {
-    // margin: 70px 0 0 0;
+
     &__accordin{
         display: flex;
         flex-direction: column;
@@ -7,21 +7,21 @@
         align-items: center;
         margin: 10px;
         &-panel{
-            // padding: 10px;
+ 
             max-width: 1000px ;
             width: 100%;
             &-item{
                 display: inline-flex;
                 align-items: center;
             }
-            &-desc{
-
-            }
             &-info{
                 display: flex;
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
+                &-dete{
+                    color: rgba(0,0,0,.54);
+                }
             }
             &-button{
                 margin: 0 100px 0 100px;

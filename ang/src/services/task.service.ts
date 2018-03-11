@@ -17,10 +17,10 @@ export class TaskService {
     return this.httpService.post("http://pm/tasks.php",  this.auth.getUserData())
   }  
 
-  public getTaskEditData(projId){
+  public getProjectUsers(projId){
     let data = this.auth.getUserData()
     data.append("projId", projId)
-    return this.httpService.post("http://pm/taskEditData.php",  data)
+    return this.httpService.post("http://pm/projectUsers.php",  data)
   }
 
   public updateTask(taskData){
@@ -29,6 +29,20 @@ export class TaskService {
       data.append(key, taskData[key])
     }
     return this.httpService.post("http://pm/editTask.php",  data)    
+  }
+
+  public deleteTask(taskId){
+    let data = this.auth.getUserData()
+    data.append('taskId', taskId);
+    return this.httpService.post("http://pm/deleteTask.php",  data)  
+  }
+
+  public createTask(taskData){
+    let data = this.auth.getUserData()
+    for(let key in taskData){
+      data.append(key, taskData[key])
+    }
+    return this.httpService.post("http://pm/createTask.php",  data)    
   }
 
 }

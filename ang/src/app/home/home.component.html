@@ -1,10 +1,9 @@
-<mat-sidenav-container class="example-container" *ngIf="shouldRun">
-    <mat-sidenav #sidenav mode="side">
+<mat-sidenav-container class="home">
+    <mat-sidenav class="home__projectsNav" #projectsNav mode="side" opened>
       <app-projects></app-projects>
     </mat-sidenav>
   
-    <mat-sidenav-content>
+    <mat-sidenav-content class="home__tasksNav">
       <app-tasks></app-tasks>
-      <p><button mat-button (click)="sidenav.toggle()">Projects</button></p>
     </mat-sidenav-content>
-</mat-sidenav-container>
+</mat-sidenav-container> 
