@@ -1,3 +1,4 @@
+import { SerachTasksService } from './../../services/serach-tasks.service';
 import { User } from './../../models/user';
 import { FormErrorStateMatcher } from './../../models/form-error-state-matcher';
 import { Project } from './../../models/project';
@@ -44,6 +45,7 @@ export class TaskCreateComponent implements OnInit {
   });
 
   constructor(
+    private serachTasksService: SerachTasksService,
     private taskService : TaskService,
     private builder: FormBuilder,
     private dialogRef : MatDialogRef<TaskCreateComponent>,
@@ -93,6 +95,7 @@ export class TaskCreateComponent implements OnInit {
           duration: 3000,
         });
         this.dialogRef.close()
+        this.serachTasksService.refresh()
       }
     })
   }

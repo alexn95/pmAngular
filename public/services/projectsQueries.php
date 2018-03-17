@@ -37,8 +37,8 @@ function saveEditProject($conn, $data){
 }
 
 function saveNewProject($conn, $data){
-    if ($data['userId'] == 'null'){
-        $data['userId'] = null;
+    if ($data['id'] == 'null'){
+        $data['id'] = null;
     }
     $query = "DECLARE @status BIT;
     EXECUTE @status = createProject
@@ -46,7 +46,7 @@ function saveNewProject($conn, $data){
         @description = ?,
         @userId = ?
     SELECT @status as status;";
-    $params = array($data['title'], $data['description'], $data['userId']);
+    $params = array($data['title'], $data['description'], $data['id']);
     $stmt = sqlsrv_query( $conn, $query, $params );
     if( $stmt === false ) {
         die( print_r( sqlsrv_errors(), true));

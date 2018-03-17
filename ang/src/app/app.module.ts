@@ -1,3 +1,4 @@
+import { SearchProjectsService } from './../services/search-projects.service';
 import { ProjectsService } from './../services/projects.service';
 import { SignupComponent } from './signup/signup.component';
 import { HttpService } from './../services/http.service';
@@ -54,6 +55,7 @@ import { TaskDeleteComponent } from './task-delete/task-delete.component';
 import { ProjectDeleteComponent } from './project-delete/project-delete.component';
 import { TaskCreateComponent } from './task-create/task-create.component';
 import { ProjectCreateComponent } from './project-create/project-create.component';
+import { SerachTasksService } from '../services/serach-tasks.service';
 
 
 @NgModule({
@@ -108,6 +110,8 @@ import { ProjectCreateComponent } from './project-create/project-create.componen
     IsAuthorized, 
     SidenavService,
     ProjectsService,
+    SerachTasksService,
+    SearchProjectsService,
   ],
   bootstrap: [AppComponent],
   entryComponents: [

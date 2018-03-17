@@ -22,6 +22,9 @@
         </mat-panel-description>
 
         <mat-action-row > 
+            <button mat-icon-button (click)="showTasks(project)" >
+                <mat-icon color="primary" matTooltip="Show tasks" matTooltipPosition="above">open_in_new</mat-icon>
+            </button>
             <button mat-icon-button (click)="createTask(project)" >
                 <mat-icon color="primary" matTooltip="Create task" matTooltipPosition="above">note_add</mat-icon>
             </button>

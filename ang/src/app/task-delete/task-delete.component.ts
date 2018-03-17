@@ -1,3 +1,4 @@
+import { SerachTasksService } from './../../services/serach-tasks.service';
 import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
 import { TaskService } from './../../services/task.service';
@@ -12,6 +13,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 export class TaskDeleteComponent implements OnInit {
 
   constructor(
+    private serachTasksService: SerachTasksService,
     private auth: AuthService,
     private router: Router,
     private snackBar: MatSnackBar,
@@ -37,7 +39,7 @@ export class TaskDeleteComponent implements OnInit {
         this.snackBar.open("Task was deleted.", "close", {
           duration: 3000,
         }); 
-        
+        this.serachTasksService.refresh()
       }
     })
   }

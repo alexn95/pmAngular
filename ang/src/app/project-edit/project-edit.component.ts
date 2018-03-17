@@ -1,3 +1,5 @@
+import { SearchProjectsService } from './../../services/search-projects.service';
+import { SerachTasksService } from './../../services/serach-tasks.service';
 import { FormErrorStateMatcher } from './../../models/form-error-state-matcher';
 import { ProjectsService } from './../../services/projects.service';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
@@ -37,6 +39,7 @@ export class ProjectEditComponent implements OnInit {
   });
 
   constructor(
+    private searchProjectsService: SearchProjectsService,
     private projectService: ProjectsService,
     private builder: FormBuilder,
     private router : Router,

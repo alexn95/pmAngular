@@ -1,3 +1,5 @@
+import { SearchProjectsService } from './../../services/search-projects.service';
+import { SerachTasksService } from './../../services/serach-tasks.service';
 import { ProjectDeleteComponent } from './../project-delete/project-delete.component';
 import { ProjectEditComponent } from './../project-edit/project-edit.component';
 import { MatSnackBar, MatDialog } from '@angular/material';
@@ -23,10 +25,13 @@ export class ProjectsComponent implements OnInit {
     private auth: AuthService,
     private snackBar: MatSnackBar,
     private projectsService: ProjectsService,
+    private serachTasksService: SerachTasksService,
+    private searchProjectsService: SearchProjectsService,
   ) { }
 
   ngOnInit() {
     this.showProjects();
+    this.searchProjectsService.refreshEmmiter.subscribe(event => this.showProjects())
   }
 
   private showProjects(){
@@ -68,7 +73,7 @@ export class ProjectsComponent implements OnInit {
   private createTask(project: Project){
     let loginRef = this.projectDeleteModal.open(TaskCreateComponent,{
       width : '90%',
-      maxWidth: '700px',
+      maxWidth: '900px',
       data: project
     });
     loginRef.afterClosed().subscribe(result =>{
@@ -79,11 +84,15 @@ export class ProjectsComponent implements OnInit {
   private createProject(){
     let loginRef = this.projectDeleteModal.open(ProjectCreateComponent,{
       width : '90%',
-      maxWidth: '900px',
+      maxWidth: '700px',
     });
     loginRef.afterClosed().subscribe(result =>{
       console.log("Closed")
     })
+  }
+
+  private allTasks(){
+    
   }
 
 

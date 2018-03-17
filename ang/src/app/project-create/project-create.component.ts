@@ -1,3 +1,4 @@
+import { SearchProjectsService } from './../../services/search-projects.service';
 import { FormErrorStateMatcher } from './../../models/form-error-state-matcher';
 import { AuthService } from './../../services/auth.service';
 import { MatSnackBar, MatDialogRef } from '@angular/material';
@@ -31,6 +32,7 @@ export class ProjectCreateComponent implements OnInit {
   });
 
   constructor(
+    private searchProjectsService: SearchProjectsService,
     private projectService: ProjectsService,
     private builder: FormBuilder,
     private router : Router,
@@ -48,12 +50,14 @@ export class ProjectCreateComponent implements OnInit {
   }
 
   private save(){
+    console.log('save')
     let projectData = {
       "title" : this.title.value,
       "description" : this.description.value,
     }
     console.log(projectData)
     this.projectService.createProject(projectData).subscribe(res=>{
+      console.log(res)
       if (!res){
         this.dialogRef.close()
         this.auth.logout()
@@ -66,10 +70,11 @@ export class ProjectCreateComponent implements OnInit {
           duration: 3000,
         });
       } else if (res['status'] == 1){
+        this.dialogRef.close()
+        this.searchProjectsService.refresh()
         this.snackBar.open("Project was created.", "close", {
           duration: 3000,
         });
-        this.dialogRef.close()
       }
     })
   }

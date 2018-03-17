@@ -1,3 +1,4 @@
+import { SerachTasksService } from './../../services/serach-tasks.service';
 import { TaskDeleteComponent } from './../task-delete/task-delete.component';
 import { AuthService } from './../../services/auth.service';
 import { TaskEditComponent } from './../task-edit/task-edit.component';
@@ -23,10 +24,12 @@ export class TasksComponent implements OnInit {
     private taskDeleteModal: MatDialog,
     private auth: AuthService,
     private snackBar : MatSnackBar,
-  ) {  }
+    private serachTasksService: SerachTasksService,
+  ) {}
 
   ngOnInit() {   
-    this.showTasks() 
+    this.showTasks()
+    this.serachTasksService.refreshEmmiter.subscribe(event => this.showTasks())
   }
 
   private showTasks() {
