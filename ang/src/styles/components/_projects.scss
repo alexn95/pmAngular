@@ -1,4 +1,5 @@
 .projects {
+    margin: 10px;
     &__accordin{
         display: flex;
         flex-direction: column;
@@ -22,6 +23,16 @@
                 margin: 0 100px 0 100px;
             }
            
+        }
+    }
+
+    &__list {
+        display: flex ; 
+        flex-direction: column ;
+        justify-content: flex-start ;
+        align-items: stretch ;
+        &-item {
+            display: flex !important;
         }
     }
 }

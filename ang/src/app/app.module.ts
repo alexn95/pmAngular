@@ -1,3 +1,4 @@
+import { SelectedProjectsService } from './../services/selected-project.service';
 import { SearchProjectsService } from './../services/search-projects.service';
 import { ProjectsService } from './../services/projects.service';
 import { SignupComponent } from './signup/signup.component';
@@ -38,7 +39,10 @@ import {
   MatSelectModule,
   MatMenuModule,
   MatSidenavModule,
-  MatCheckboxModule
+  MatCheckboxModule,
+  MatChipsModule,
+  MatButtonToggle,
+  MatButtonToggleModule
 } from '@angular/material';
 
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
@@ -56,6 +60,8 @@ import { ProjectDeleteComponent } from './project-delete/project-delete.componen
 import { TaskCreateComponent } from './task-create/task-create.component';
 import { ProjectCreateComponent } from './project-create/project-create.component';
 import { SerachTasksService } from '../services/serach-tasks.service';
+import { ProjectComponent } from './project/project.component';
+import { ProjectDataComponent } from './project-data/project-data.component';
 
 
 @NgModule({
@@ -74,6 +80,8 @@ import { SerachTasksService } from '../services/serach-tasks.service';
     ProjectDeleteComponent,
     TaskCreateComponent,
     ProjectCreateComponent,
+    ProjectComponent,
+    ProjectDataComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,7 +108,9 @@ import { SerachTasksService } from '../services/serach-tasks.service';
     MatSelectModule,
     MatMenuModule,
     MatSidenavModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatChipsModule,
+    MatButtonToggleModule,
     
   ],
   providers: [
@@ -112,6 +122,7 @@ import { SerachTasksService } from '../services/serach-tasks.service';
     ProjectsService,
     SerachTasksService,
     SearchProjectsService,
+    SelectedProjectsService,
   ],
   bootstrap: [AppComponent],
   entryComponents: [

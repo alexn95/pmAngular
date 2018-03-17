@@ -1,9 +1,11 @@
 <mat-sidenav-container class="home">
     <mat-sidenav class="home__projectsNav" #projectsNav mode="side" opened>
-      <app-projects></app-projects>
+      <mat-card class="home__projects-card">
+        <app-projects></app-projects>
+      </mat-card>
     </mat-sidenav>
   
     <mat-sidenav-content class="home__tasksNav">
-      <app-tasks></app-tasks>
+      <app-project></app-project>
     </mat-sidenav-content>
 </mat-sidenav-container> 

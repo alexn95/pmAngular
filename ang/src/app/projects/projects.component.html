@@ -4,7 +4,7 @@
             <mat-icon color="primary"  matTooltip="Create project"  matTooltipPosition="above">note_add</mat-icon>
         </button>
     </div>
-    <mat-accordion class="projects__accordin" displayMode="default" [multi]="true" [hideToggle]="false"  
+    <!-- <mat-accordion class="projects__accordin" displayMode="default" [multi]="true" [hideToggle]="false"  
     *ngFor="let project of projects">
     <mat-expansion-panel class="projects__accordin-panel" [hideToggle]="false" #panel>
         <mat-expansion-panel-header>
@@ -39,5 +39,16 @@
             </button>
         </mat-action-row>
     </mat-expansion-panel>
-  </mat-accordion> 
+  </mat-accordion>  -->
+    <div class="projects__list">
+        <button mat-button color="primary"  *ngFor="let project of projects"  class="projects__list-item"
+            (click)="showProject(project)">
+            {{project.title}} 
+        </button>
+    </div>
+    <!-- <matlist class="projects__list" >
+        <mat-chip color="primary" selected="true" class="projects__list-item" *ngFor="let project of projects">
+             {{project.title}} 
+        </mat-chip>
+    </mat-chip-list> -->
 </div>

@@ -36,4 +36,10 @@ export class ProjectsService {
     return this.httpService.post("http://pm/deleteProject.php",  data)  
   }
 
+  public getProjectById(projectId){
+    let data = this.auth.getUserData()
+    data.append('projectId', projectId);
+    return this.httpService.post("http://pm/projectById.php",  data)  
+  }
+
 }

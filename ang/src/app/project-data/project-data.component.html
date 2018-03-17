@@ -1,0 +1,23 @@
+<div class="project-data__warning" *ngIf="project==undefind">Select a project for details</div>
+<div class="project-data" *ngIf="project!=undefind">
+    <div  class="project-data__info">
+        <span class="project-data__info__title"> {{project.title}}</span>
+        <span class="project-data__info__state">{{project.project_state}}</span>
+        <span class="project-data__info__date">{{project.create_date.date | date: 'short'}}</span>
+    </div>
+    <div class="project-data__description">
+        {{project.description}}
+    </div>   
+    <mat-divider></mat-divider>
+    <div class="project-data__action-panel">
+        <button mat-icon-button (click)="createTask()" >
+            <mat-icon color="primary" matTooltip="Create task" matTooltipPosition="above">note_add</mat-icon>
+        </button>
+        <button mat-icon-button (click)="editProject()" >
+            <mat-icon color="primary" matTooltip="Edit" matTooltipPosition="above">mode_edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deleteProject()">
+            <mat-icon color="warn"  matTooltip="Delete"  matTooltipPosition="above">delete_forever</mat-icon>
+        </button>
+    </div>
+</div>

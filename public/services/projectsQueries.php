@@ -14,6 +14,22 @@ function getProjects($conn){
     return $result;
 }
 
+function getProjectById($conn, $id){
+    $query = "SELECT projects.id, projects.title, [state] as project_state, description, create_date  FROM projects
+                WHERE projects.id = ?";
+    $params = array($id);
+    $stmt = sqlsrv_query( $conn, $query, $params);
+    if( $stmt === false ) {
+        die( print_r( sqlsrv_errors(), true));
+    } 
+
+    $result = array(); 
+    while( $row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)){
+        $result[] = $row;
+    }
+    return $result;
+}
+
 function saveEditProject($conn, $data){
     if ($data['userId'] == 'null'){
         $data['userId'] = null;
