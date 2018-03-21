@@ -1,3 +1,4 @@
+import { FormBuilder, Validators } from '@angular/forms';
 import { SelectedProjectsService } from './../../services/selected-project.service';
 import { SearchProjectsService } from './../../services/search-projects.service';
 import { SerachTasksService } from './../../services/serach-tasks.service';
@@ -20,7 +21,17 @@ export class ProjectsComponent implements OnInit {
 
     private projects: Project[]
 
+    public title =  this.builder.control('', [
+        Validators.maxLength(50)
+    ]);
+    public onlyYourProjects = this.builder.control([]);
+    public projectsSearchForm = this.builder.group({
+        title : this.title,
+        onlyYourProjects: this.onlyYourProjects,
+    });
+
     constructor( 
+        private builder: FormBuilder,
         private router: Router,
         private projectEditModal: MatDialog,
         private projectDeleteModal: MatDialog,
@@ -33,14 +44,38 @@ export class ProjectsComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-        this.showProjects();
-        this.searchProjectsService.refreshEmmiter.subscribe(event => this.showProjects())
+
+        this.searchProjectsService.refreshEmmiter.subscribe(event => this.searchProjects())
+        this.projectsSearchForm.valueChanges
+            .debounceTime(800)
+            .subscribe((val) =>{
+                console.log('valueChanges');
+                this.searchProjects();
+            })
+        this.searchProjects();
     }
 
 
+    private showProject(project: Project) {
+        this.selectedProjectsService.selectProject(project);
+    }
 
-    private showProjects() {
-        this.projectsService.getProjects().subscribe((res) => {
+    public createProject(){
+        let loginRef = this.projectDeleteModal.open(ProjectCreateComponent,{
+            width : '90%',
+            maxWidth: '700px',
+        });
+        loginRef.afterClosed().subscribe(result =>{
+            console.log("Closed")
+        })
+    }
+
+    public searchProjects(){
+        if (this.title.value == undefined) {
+            this.title.setValue('');
+            return;
+        }
+        this.projectsService.searchProjects(this.title.value, this.onlyYourProjects.value).subscribe((res) => {
             console.log(res)
             if (!res){
                 this.auth.logout()
@@ -52,22 +87,6 @@ export class ProjectsComponent implements OnInit {
             this.projects = res as Project[];
         })
     }
-
-    private showProject(project: Project) {
-        this.selectedProjectsService.selectProject(project);
-    }
-
-    private createProject(){
-        let loginRef = this.projectDeleteModal.open(ProjectCreateComponent,{
-            width : '90%',
-            maxWidth: '700px',
-        });
-        loginRef.afterClosed().subscribe(result =>{
-            console.log("Closed")
-        })
-    }
-
-
 
 
 }

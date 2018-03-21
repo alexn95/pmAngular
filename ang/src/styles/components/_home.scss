@@ -1,16 +1,21 @@
-.home {
+.home { 
+    background-color: white;
     &__projectsNav{
         width: 20%;
-        @media (max-width: 400px) {
+        min-width: 350px;
+       
+        @media (max-width: 700px) {
             width: 100%;
+            
         }
     }
     &__tasksNav{
-        // width: 70%;
+        min-width: 350px;
     }
     &__projects-card{
         margin: 10px;
-        height: 84.5%;
+        padding: 10px !important;
+
     }
   }
   

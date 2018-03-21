@@ -1,28 +1,13 @@
-.projects {
+.projects { 
     margin: 10px;
-    &__accordin{
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        margin: 10px;
-        &-panel{
-            max-width: 400px ;
-            width: 100%;
-            &-item{
-                display: inline-flex;
-                align-items: center;
+
+    &__search {
+        &__form {
+            &-input {
+                padding: 0 10px;
+                width: 65%;
+                max-width: 250px;
             }
-            &-info{
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-            }
-            &-button{
-                margin: 0 100px 0 100px;
-            }
-           
         }
     }
 

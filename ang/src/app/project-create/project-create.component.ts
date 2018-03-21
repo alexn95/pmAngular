@@ -14,7 +14,6 @@ import { Component, OnInit } from '@angular/core';
 export class ProjectCreateComponent implements OnInit {
 
   private matcher = new FormErrorStateMatcher();
-  bol: string;
 
   private title = new FormControl('', [
     Validators.required,
@@ -44,7 +43,6 @@ export class ProjectCreateComponent implements OnInit {
    }
 
   ngOnInit() { 
-    this.bol.trim()
   }
 
   private cancel(){

@@ -27,9 +27,9 @@ export class TasksComponent implements OnInit {
     public tasks: Task[];
 
     public title =  this.builder.control('', [
-        Validators.maxLength(200)
+        Validators.maxLength(50)
     ]);
-    public onlyProjectsTasks = this.builder.control('');
+    public onlyProjectsTasks = this.builder.control([]);
     public tasksSearchForm = this.builder.group({
         title : this.title,
         onlyProjectsTasks: this.onlyProjectsTasks,
@@ -64,9 +64,6 @@ export class TasksComponent implements OnInit {
         });
         this.searchTasks();
     }
-
-
-
 
     private searchTasks() {
         if (this.title.value == undefined) {
@@ -130,8 +127,5 @@ export class TasksComponent implements OnInit {
         });
     }
 
-    private search() {
-
-    }
 
 }

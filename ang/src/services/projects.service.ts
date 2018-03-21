@@ -3,15 +3,20 @@ import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class ProjectsService {
+export class ProjectsService { 
 
   constructor( 
     private auth: AuthService,
     private httpService : HttpService,
   ) { }
 
-  public getProjects(){
-    return this.httpService.post("http://pm/projects.php",  this.auth.getUserData())
+
+
+  public searchProjects(title: string, onlyUserProjects: boolean){
+    let data = this.auth.getUserData();
+    data.append("onlyUserProjects", onlyUserProjects.toString());
+    data.append("title", title);
+    return this.httpService.post("http://pm/projects.php",  data)
   }
   
   public createProject(projectData){

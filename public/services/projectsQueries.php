@@ -1,8 +1,9 @@
 <?php
 
-function getProjects($conn){
-    $query = "SELECT projects.id, projects.title, [state] as project_state, description, create_date  FROM projects";
-    $stmt = sqlsrv_query( $conn, $query);
+function searchProjects($conn, $onlyUserProjects, $title, $userId){
+    $query = "EXEC searchProjects @onlyUserProjects = ?, @title = ?, @userId = ?;";
+    $params = array($onlyUserProjects, $title, $userId);
+    $stmt = sqlsrv_query( $conn, $query, $params);
     if( $stmt === false ) {
         die( print_r( sqlsrv_errors(), true));
     } 

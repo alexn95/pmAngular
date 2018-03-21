@@ -1,5 +1,18 @@
 .tasks {
 
+    &__search {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        &__form {
+            &-input {
+                padding: 0 20px;
+                width: 300px;
+            }
+        }
+    }
+
     &__accordin{
         display: flex;
         flex-direction: column;
@@ -7,7 +20,6 @@
         align-items: center;
         margin: 10px;
         &-panel{
- 
             max-width: 1000px ;
             width: 100%;
             &-item{
@@ -20,7 +32,7 @@
                 justify-content: space-between;
                 align-items: center;
                 &-dete{
-                    color: rgba(0,0,0,.54);
+                    color: rgba(0,0,0,54);
                 }
             }
             &-button{

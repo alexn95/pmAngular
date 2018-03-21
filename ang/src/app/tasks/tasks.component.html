@@ -1,14 +1,14 @@
 <div class="tasks">
   <div class="tasks__search">
-      <form [formGroup]="tasksSearchForm" (ngSubmit)="search()" class="tasks__search__form">
+      <form [formGroup]="tasksSearchForm" class="tasks__search__form">
         <mat-form-field mode="search" class="tasks__search__form-input">
-            <mat-icon matPrefix>search</mat-icon>
+            <!-- <mat-icon matPrefix>search</mat-icon> -->
             <input  matInput placeholder="search" name="title" id="title" [formControl]="title" 
             [errorStateMatcher]="matcher" [(ngModel)]="value">
             <mat-error *ngIf="title.hasError('maxlength')">
                 Title can not be longer than 50 characters.
             </mat-error>
-            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+            <button mat-button type="button"  *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
               <mat-icon>close</mat-icon>
             </button>
         </mat-form-field>
