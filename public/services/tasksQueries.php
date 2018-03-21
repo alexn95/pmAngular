@@ -25,7 +25,7 @@ function saveEditTask($conn, $data){
     $query = "DECLARE @status BIT;
     EXECUTE @status = editTask
         @taskId = ?,
-        @title = ?,
+        @title = ?, 
         @type = ?,
         @description = ?,
         @userId = ?,
@@ -79,12 +79,10 @@ function saveNewTask($conn, $data){
     return $result;
 }
 
-function getTasks($conn){
-    $query = "SELECT tasks.id, tasks.title, tasks.description, tasks.state as task_state, tasks.create_date,
-                tasks.type, projects.title as project_title, tasks.project_id, users.login, tasks.user_id FROM tasks
-                LEFT JOIN projects  ON tasks.project_id = projects.id
-                LEFT JOIN users  ON tasks.user_id = users.id;";
-    $stmt = sqlsrv_query( $conn, $query);
+function searchTasks($conn, $projId, $title){
+    $query = "EXEC searchTasks @projectId = ?, @title = ?;";
+    $params = array($projId, $title);
+    $stmt = sqlsrv_query( $conn, $query, $params);
     if( $stmt === false ) {
         die( print_r( sqlsrv_errors(), true));
     } 

@@ -1,5 +1,22 @@
 <div class="tasks">
-  <mat-accordion class="tasks__accordin" displayMode="default" [multi]="true" [hideToggle]="false"  *ngFor="let task of tasks">
+  <div class="tasks__search">
+      <form [formGroup]="tasksSearchForm" (ngSubmit)="search()" class="tasks__search__form">
+        <mat-form-field mode="search" class="tasks__search__form-input">
+            <mat-icon matPrefix>search</mat-icon>
+            <input  matInput placeholder="search" name="title" id="title" [formControl]="title" 
+            [errorStateMatcher]="matcher" [(ngModel)]="value">
+            <mat-error *ngIf="title.hasError('maxlength')">
+                Title can not be longer than 50 characters.
+            </mat-error>
+            <button mat-button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+              <mat-icon>close</mat-icon>
+            </button>
+        </mat-form-field>
+        <mat-checkbox formControlName="onlyProjectsTasks" [disabled]="this.project == undefined" >Only projects tasks</mat-checkbox>
+      </form>
+  </div>
+  <mat-accordion class="tasks__accordin" displayMode="default" [multi]="true" [hideToggle]="false"  
+  *ngFor="let task of tasks">
     <mat-expansion-panel class="tasks__accordin-panel" [hideToggle]="false" #panel>
         <mat-expansion-panel-header>
           <mat-panel-title class="tasks__accordin-panel-item">
@@ -17,7 +34,7 @@
           <span class="tasks__accordin-panel-info-dete">{{task.create_date.date | date: 'short'}}</span>
           <span>{{task.login}} </span>
           <button type="button" (click)="selectProject(task.project_id)" mat-button>{{task.project_title}}</button>
-        </p>    
+        </p>     
         <mat-action-row >  
           <button mat-icon-button (click)="editTask(task)" >
             <mat-icon color="primary" matTooltip="Edit" matTooltipPosition="above">mode_edit</mat-icon>

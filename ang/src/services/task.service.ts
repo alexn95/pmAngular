@@ -13,13 +13,16 @@ export class TaskService {
     private httpService : HttpService,
   ) { }
 
-  public getTasks() {
-    return this.httpService.post("http://pm/tasks.php",  this.auth.getUserData())
+  public searchTasks(title: string, projId) {
+    let data = this.auth.getUserData();
+    data.append("projId", projId);
+    data.append("title", title);
+    return this.httpService.post("http://pm/tasks.php",  data);
   }  
 
   public getProjectUsers(projId){
-    let data = this.auth.getUserData()
-    data.append("projId", projId)
+    let data = this.auth.getUserData();
+    data.append("projId", projId);
     return this.httpService.post("http://pm/projectUsers.php",  data)
   }
 

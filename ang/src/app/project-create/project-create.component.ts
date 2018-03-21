@@ -14,6 +14,7 @@ import { Component, OnInit } from '@angular/core';
 export class ProjectCreateComponent implements OnInit {
 
   private matcher = new FormErrorStateMatcher();
+  bol: string;
 
   private title = new FormControl('', [
     Validators.required,
@@ -24,7 +25,7 @@ export class ProjectCreateComponent implements OnInit {
   private description = new FormControl('', [
     Validators.minLength(3),
     Validators.maxLength(200)
-  ]);
+  ]); 
 
   private projectCreateForm: FormGroup = this.builder.group({
     title: this.title,
@@ -43,6 +44,7 @@ export class ProjectCreateComponent implements OnInit {
    }
 
   ngOnInit() { 
+    this.bol.trim()
   }
 
   private cancel(){

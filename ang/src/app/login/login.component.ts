@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     private dialogRef : MatDialogRef<LoginComponent>,
     private snackBar : MatSnackBar,
     private modal : MatDialog
-  ) { }
+  ) {  }
 
   ngOnInit() {}
 
