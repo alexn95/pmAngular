@@ -10,4 +10,5 @@ export class Task {
     project_title : string;
     project_id : number;
     create_date: Date;
+    user_role: number;
 }

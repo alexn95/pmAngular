@@ -79,9 +79,9 @@ function saveNewTask($conn, $data){
     return $result;
 }
 
-function searchTasks($conn, $projId, $title){
-    $query = "EXEC searchTasks @projectId = ?, @title = ?;";
-    $params = array($projId, $title);
+function searchTasks($conn, $projId, $title, $userId){
+    $query = "EXEC searchTasks @projectId = ?, @title = ?, @userId = ?;";
+    $params = array($projId, $title, $userId);
     $stmt = sqlsrv_query( $conn, $query, $params);
     if( $stmt === false ) {
         die( print_r( sqlsrv_errors(), true));
@@ -97,6 +97,24 @@ function searchTasks($conn, $projId, $title){
 function deleteTask($conn, $taskId){
     $query = "DELETE FROM tasks WHERE id = ?;";
     $stmt = sqlsrv_query( $conn, $query, [$taskId]);
+    if( $stmt === false ) {
+        die( print_r( sqlsrv_errors(), true));
+    } 
+}
+
+function takeTask($conn, $taskId, $userId){
+    $query = "UPDATE tasks SET user_id = ? WHERE id = ?";
+    $params = array($userId, $taskId);
+    $stmt = sqlsrv_query( $conn, $query, $params);
+    if( $stmt === false ) {
+        die( print_r( sqlsrv_errors(), true));
+    } 
+}
+
+function leaveTask($conn, $taskId){
+    $query = "UPDATE tasks SET user_id = null WHERE id = ?";
+    $params = array($taskId);
+    $stmt = sqlsrv_query( $conn, $query, $params);
     if( $stmt === false ) {
         die( print_r( sqlsrv_errors(), true));
     } 

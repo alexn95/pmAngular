@@ -5,4 +5,5 @@ export class Project {
     project_state : string;
     description : string;
     create_date : Date;
+    user_role: number;
 }

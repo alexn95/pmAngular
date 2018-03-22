@@ -1,5 +1,23 @@
 <?php
 
+function leaveProject($conn, $projectId, $userId){
+    $query = "DELETE FROM users_projects WHERE users_projects.user_id = ? AND users_projects.project_id = ?";
+    $params = array($userId, $projectId);
+    $stmt = sqlsrv_query( $conn, $query, $params);
+    if( $stmt === false ) {
+        die( print_r( sqlsrv_errors(), true));
+    } 
+}
+
+function joinProject($conn, $projectId, $userId){
+    $query = "INSERT INTO users_projects(user_id, project_id, role) VALUES (?, ?, 2)";
+    $params = array($userId, $projectId);
+    $stmt = sqlsrv_query( $conn, $query, $params);
+    if( $stmt === false ) {
+        die( print_r( sqlsrv_errors(), true));
+    } 
+}
+
 function searchProjects($conn, $onlyUserProjects, $title, $userId){
     $query = "EXEC searchProjects @onlyUserProjects = ?, @title = ?, @userId = ?;";
     $params = array($onlyUserProjects, $title, $userId);

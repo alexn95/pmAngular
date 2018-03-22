@@ -1,6 +1,7 @@
 .projects { 
     margin: 10px;
 
+
     &__search {
         &__form {
             &-input {
@@ -17,7 +18,13 @@
         justify-content: flex-start ;
         align-items: stretch ;
         &-item {
-            display: flex !important;
+            display: flex !important; 
+            flex-direction: row ;
+            justify-content: space-between;
+            align-items: center;
+            &-icon{
+                color: dimgray;
+            }
         }
     }
 }

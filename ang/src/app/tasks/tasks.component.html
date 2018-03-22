@@ -2,7 +2,6 @@
   <div class="tasks__search">
       <form [formGroup]="tasksSearchForm" class="tasks__search__form">
         <mat-form-field mode="search" class="tasks__search__form-input">
-            <!-- <mat-icon matPrefix>search</mat-icon> -->
             <input  matInput placeholder="search" name="title" id="title" [formControl]="title" 
             [errorStateMatcher]="matcher" [(ngModel)]="value">
             <mat-error *ngIf="title.hasError('maxlength')">
@@ -36,10 +35,16 @@
           <button type="button" (click)="selectProject(task.project_id)" mat-button>{{task.project_title}}</button>
         </p>     
         <mat-action-row >  
-          <button mat-icon-button (click)="editTask(task)" >
+          <button *ngIf="getUserRole(task) <= 2 && isTaskFree(task)" mat-icon-button (click)="takeTask(task)" >
+            <mat-icon color="primary" matTooltip="Take" matTooltipPosition="above">add_boxe</mat-icon>
+          </button>
+          <button *ngIf="getUserRole(task) <= 2 && isTakedTask(task)" mat-icon-button (click)="leaveTask(task)" >
+            <mat-icon color="primary" matTooltip="Leave" matTooltipPosition="above">remove_circle</mat-icon>
+          </button>
+          <button *ngIf="getUserRole(task) <= 1" mat-icon-button (click)="editTask(task)" >
             <mat-icon color="primary" matTooltip="Edit" matTooltipPosition="above">mode_edit</mat-icon>
           </button>
-          <button mat-icon-button (click)="deleteTask(task)">
+          <button *ngIf="getUserRole(task) <= 1" mat-icon-button (click)="deleteTask(task)">
             <mat-icon color="warn"  matTooltip="Delete"  matTooltipPosition="above">delete_forever</mat-icon>
           </button>
           <button mat-icon-button (click)="panel.expanded = false">

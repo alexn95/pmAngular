@@ -9,14 +9,20 @@
         {{project.description}}
     </div>   
     <mat-divider></mat-divider>
-    <div class="project-data__action-panel">
-        <button mat-icon-button (click)="createTask()" >
+    <div  class="project-data__action-panel">
+        <button *ngIf="getUserRole() == 2" mat-icon-button (click)="leaveProject()" >
+            <mat-icon color="primary" matTooltip="Leave project" matTooltipPosition="above">remove_circle</mat-icon>
+        </button>
+        <button *ngIf="getUserRole() == 3" mat-icon-button (click)="joinProject()" >
+            <mat-icon color="primary" matTooltip="Join project" matTooltipPosition="above">add_boxe</mat-icon>
+        </button>
+        <button *ngIf="getUserRole() == 1" mat-icon-button (click)="createTask()" >
             <mat-icon color="primary" matTooltip="Create task" matTooltipPosition="above">note_add</mat-icon>
         </button>
-        <button mat-icon-button (click)="editProject()" >
+        <button *ngIf="getUserRole() == 1" mat-icon-button (click)="editProject()" >
             <mat-icon color="primary" matTooltip="Edit" matTooltipPosition="above">mode_edit</mat-icon>
         </button>
-        <button mat-icon-button (click)="deleteProject()">
+        <button *ngIf="getUserRole() == 1" mat-icon-button (click)="deleteProject()">
             <mat-icon color="warn"  matTooltip="Delete"  matTooltipPosition="above">delete_forever</mat-icon>
         </button>
     </div>

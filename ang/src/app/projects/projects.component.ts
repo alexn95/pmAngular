@@ -19,7 +19,7 @@ import { ProjectCreateComponent } from '../project-create/project-create.compone
 })
 export class ProjectsComponent implements OnInit {
 
-    private projects: Project[]
+    public projects: Project[];
 
     public title =  this.builder.control('', [
         Validators.maxLength(50)
@@ -86,6 +86,10 @@ export class ProjectsComponent implements OnInit {
             }
             this.projects = res as Project[];
         })
+    }
+
+    private getUserRole(project: Project): number {
+        return project.user_role == null ? 3 : project.user_role;
     }
 
 

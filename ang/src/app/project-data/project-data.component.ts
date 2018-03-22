@@ -11,63 +11,110 @@ import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Project } from '../../models/project';
 
 @Component({
-  selector: 'app-project-data',
-  templateUrl: './project-data.component.html'
+    selector: 'app-project-data',
+    templateUrl: './project-data.component.html'
 })
 export class ProjectDataComponent implements OnInit, OnChanges {
-  
-  private project: Project;
 
-  constructor(
-    private router: Router,
-    private projectEditModal: MatDialog,
-    private projectDeleteModal: MatDialog,
-    private auth: AuthService,
-    private snackBar: MatSnackBar,
-    private projectsService: ProjectsService,
-    private selectedProjectsService: SelectedProjectsService,
-  ) { }
+    public project: Project;
 
-  ngOnInit() {
-    this.selectedProjectsService.projectEmmiter.subscribe(project => this.project = project)
-  }
+    constructor(
+        private projectService: ProjectsService,
+        private router: Router,
+        private projectEditModal: MatDialog,
+        private projectDeleteModal: MatDialog,
+        private auth: AuthService,
+        private snackBar: MatSnackBar,
+        private projectsService: ProjectsService,
+        private selectedProjectsService: SelectedProjectsService,
+    ) { }
 
-  ngOnChanges(){
-  }
+    ngOnInit() {
+        this.selectedProjectsService.projectEmmiter.subscribe(project => this.project = project)
+    }
 
-  private editProject() {
-    let loginRef = this.projectEditModal.open(ProjectEditComponent,{
-      width : '90%',
-      maxWidth: '900px',
-      data: this.project
-    });
-    loginRef.afterClosed().subscribe(result =>{
-      console.log("Closed")
-    })
-  } 
+    ngOnChanges(){
+    }
 
-  private deleteProject(){
-    let loginRef = this.projectDeleteModal.open(ProjectDeleteComponent,{
-      width : '90%',
-      maxWidth: '300px',
-      data: this.project
-    });
-    loginRef.afterClosed().subscribe(result =>{
-      console.log("Closed")
-    })
-  }
+    public editProject(): void {
+        let loginRef = this.projectEditModal.open(ProjectEditComponent,{
+            width : '90%',
+            maxWidth: '900px',
+            data: this.project
+        });
+        loginRef.afterClosed().subscribe(result =>{
+            console.log("Closed")
+        })
+    } 
 
-  private createTask(){
-    let loginRef = this.projectDeleteModal.open(TaskCreateComponent,{
-      width : '90%',
-      maxWidth: '900px',
-      data: this.project
-    });
-    loginRef.afterClosed().subscribe(result =>{
-      console.log("Closed")
-    })
-  }
+    public deleteProject(): void {
+        let loginRef = this.projectDeleteModal.open(ProjectDeleteComponent,{
+            width : '90%',
+            maxWidth: '300px',
+            data: this.project
+        });
+        loginRef.afterClosed().subscribe(result =>{
+            console.log("Closed")
+        })
+    }
 
-  
+    public createTask(): void {
+        let loginRef = this.projectDeleteModal.open(TaskCreateComponent,{
+            width : '90%',
+            maxWidth: '900px',
+            data: this.project
+        });
+        loginRef.afterClosed().subscribe(result =>{
+            console.log("Closed")
+        })
+    }
+
+    public joinProject(): void {
+        this.projectService.joinProject(this.project.id).subscribe(res=>{
+            if (!res){
+                this.auth.logout()
+                this.snackBar.open("Your user session was not valid.", "close", {
+                    duration: 3000,
+                }); 
+                return;
+            } else {
+                this.snackBar.open("Project was joined.", "close", {
+                    duration: 3000,
+                });
+                this.project.user_role = 2;
+            }
+        })
+    }
+
+    public leaveProject(): void {
+        this.projectService.leaveProject(this.project.id).subscribe(res=>{
+            if (!res){
+                this.auth.logout()
+                this.snackBar.open("Your user session was not valid.", "close", {
+                    duration: 3000,
+                }); 
+                return;
+            } else {
+                this.project.user_role = null;
+                this.snackBar.open("Project was leaved.", "close", {
+                    duration: 3000,
+                }); 
+            }
+        })
+    }
+
+    public getUserRole(): number{
+        let result: number;
+        if (this.project == undefined) {
+            result = 0;
+        } else if (this.project.user_role == null) {
+            result = 3;
+        } else {
+            result = this.project.user_role;
+        }
+        return result;
+    }
+
+
 
 }

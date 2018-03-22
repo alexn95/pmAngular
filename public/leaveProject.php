@@ -5,7 +5,7 @@ header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Ac
 
 include 'services/MSSConnect.php';
 include 'services/isValidToken.php';
-include 'services/tasksQueries.php';
+include 'services/projectsQueries.php';
 
 if (!isValidToken($_POST)){
     echo(json_encode(false));
@@ -14,9 +14,8 @@ if (!isValidToken($_POST)){
 
 
 $conn = MSSConnect();
-$result = saveEditTask($conn, $_POST);
+leaveProject($conn, $_POST['projectId'], $_POST['id']);
 
-$jsonData = json_encode($result);
+$jsonData = json_encode(true);
 echo($jsonData);
 sqlsrv_close($conn);
-

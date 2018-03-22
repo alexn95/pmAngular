@@ -47,4 +47,16 @@ export class ProjectsService {
     return this.httpService.post("http://pm/projectById.php",  data)  
   }
 
+  public leaveProject(projectId){
+    let data = this.auth.getUserData()
+    data.append('projectId', projectId);
+    return this.httpService.post("http://pm/leaveProject.php",  data)  
+  }
+
+  public joinProject(projectId){
+    let data = this.auth.getUserData()
+    data.append('projectId', projectId);
+    return this.httpService.post("http://pm/joinProject.php",  data)  
+  }
+
 }

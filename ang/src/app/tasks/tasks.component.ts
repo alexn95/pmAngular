@@ -127,5 +127,52 @@ export class TasksComponent implements OnInit {
         });
     }
 
+    public takeTask(task: Task): void {
+        this.taskService.takeTask(task.id).subscribe(res=>{
+            if (!res){
+                this.auth.logout()
+                this.snackBar.open("Your user session was not valid.", "close", {
+                    duration: 3000,
+                }); 
+                return;
+            } else {
+                this.snackBar.open("Task was taked.", "close", {
+                    duration: 3000,
+                });
+                task.user_id = Number(localStorage.getItem("id"));
+                task.login = localStorage.getItem("login");
+            }
+        })
+    }
+
+    public leaveTask(task: Task): void {
+        this.taskService.leaveTask(task.id).subscribe(res=>{
+            if (!res){
+                this.auth.logout()
+                this.snackBar.open("Your user session was not valid.", "close", {
+                    duration: 3000,
+                }); 
+                return;
+            } else {
+                this.snackBar.open("Task was leaved.", "close", {
+                    duration: 3000,
+                });
+                task.user_id = null;
+                task.login = null;
+            }
+        })
+    }
+
+    public getUserRole(task: Task): number {
+        return task.user_role == null ? 3 : task.user_role;
+    }
+
+    public isTaskFree(task: Task): boolean {
+        return task.user_id == null;
+    }
+
+    public isTakedTask(task: Task): boolean {
+        return task.user_id == Number(localStorage.getItem("id"));
+    }
 
 }

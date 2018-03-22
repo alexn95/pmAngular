@@ -2,8 +2,8 @@
   <mat-icon class="toolbar__home_icon">home</mat-icon>
   <a mat-button href="/" class="toolbar__project-title">Project manager</a>
   <span class="toolbar__space"></span>
-  <button *ngIf="isShowProjectToogle()" mat-button (click)="toggleNav()" class="toolbar__button">
-    {{projectsAction}}
+  <button *ngIf="isShowProjectToogle()" mat-button (click)="toggleNav()" class="toolbar__button" matTooltip="{{tooltip}}">
+      <mat-icon>{{projectsAction}}</mat-icon>
   </button>
   
   <button mat-icon-button (click)="initUserAction()"  [matMenuTriggerFor]="menu">
@@ -19,4 +19,4 @@
       <span>Sign up</span>
     </button> 
   </mat-menu>
-</mat-toolbar> 
+</mat-toolbar>

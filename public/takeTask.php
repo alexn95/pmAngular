@@ -14,9 +14,8 @@ if (!isValidToken($_POST)){
 
 
 $conn = MSSConnect();
-$result = saveEditTask($conn, $_POST);
+takeTask($conn, $_POST['taskId'], $_POST['id']);
 
-$jsonData = json_encode($result);
+$jsonData = json_encode(true);
 echo($jsonData);
 sqlsrv_close($conn);
-

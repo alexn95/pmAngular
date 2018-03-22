@@ -1,8 +1,13 @@
-.project-tasks-card{
-    margin: 10px;
-    padding: 10px !important;
-}
-.project-data-card{
-    margin: 10px;
-    padding: 10px !important;
+.project {
+    height: 600px;
+    overflow: auto;
+
+    &__tasks-card{
+        margin: 10px;
+        padding: 10px !important;
+    }
+    &__data-card{
+        margin: 10px;
+        padding: 10px !important;
+    }
 }

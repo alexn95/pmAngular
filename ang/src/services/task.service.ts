@@ -48,5 +48,17 @@ export class TaskService {
     return this.httpService.post("http://pm/createTask.php",  data)    
   }
 
+  public takeTask(taskId){
+    let data = this.auth.getUserData()
+    data.append("taskId", taskId);
+    return this.httpService.post("http://pm/takeTask.php",  data)    
+  }
+
+  public leaveTask(taskId){
+    let data = this.auth.getUserData()
+    data.append("taskId", taskId);
+    return this.httpService.post("http://pm/leaveTask.php",  data)    
+  }
+
 }
 

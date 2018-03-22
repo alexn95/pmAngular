@@ -32,7 +32,8 @@
                 justify-content: space-between;
                 align-items: center;
                 &-dete{
-                    color: rgba(0,0,0,54);
+                    color: rgba(0,0,0,0.54);
+                    font-size: 13px;
                 }
             }
             &-button{
