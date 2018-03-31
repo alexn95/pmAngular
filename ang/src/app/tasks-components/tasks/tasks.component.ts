@@ -25,16 +25,10 @@ export class TasksComponent implements OnInit {
     public project: Project;
     public tasks: Task[];
 
-    public title = this.builder.control('', [
-        Validators.maxLength(50)
-    ]);
-    public onlyProjectsTasks = this.builder.control(null);
-    // public onlyTakedTasks = this.builder.control(null);
-    public tasksSearchForm = this.builder.group({
-        title: this.title,
-        onlyProjectsTasks: this.onlyProjectsTasks,
-        // onlyTakedTasks: this.onlyTakedTasks,
-    });
+    public title: FormControl;
+    public onlyProjectsTasks: FormControl;
+    // public onlyTakedTasks: FormControl;
+    public tasksSearchForm: FormGroup;
 
     constructor(
         private builder: FormBuilder,
@@ -48,6 +42,14 @@ export class TasksComponent implements OnInit {
         private selectedProjectsService: SelectedProjectsService,
         private projectsService: ProjectsService,
     ) {
+        this.title =  new FormControl('', [
+            Validators.maxLength(50)
+        ]);
+        this.onlyProjectsTasks = new FormControl(null);
+        this.tasksSearchForm = new FormGroup({
+            title: this.title,
+            onlyProjectsTasks: this.onlyProjectsTasks,
+        });
     }
 
     ngOnInit() {
@@ -67,7 +69,7 @@ export class TasksComponent implements OnInit {
     }
 
     private searchTasks(): void {
-        if (!this.title.value) {
+        if (this.title.value === undefined) {
             this.title.setValue('');
             return;
         }

@@ -7,7 +7,7 @@
                 <mat-icon color="primary"  matTooltip="Create project"  matTooltipPosition="above">note_add</mat-icon>
             </button>
             <mat-form-field mode="search" class="projects__search__form-input">
-                <input  matInput placeholder="search" name="title" id="title" [formControl]="title" 
+                <input  matInput placeholder="search" name="ProjectTitle" id="ProjectTitle" [formControl]="title" 
                     [errorStateMatcher]="matcher" [(ngModel)]="value">
                 <mat-error *ngIf="title.hasError('maxlength')">
                     Title can not be longer than 50 characters.
@@ -33,10 +33,10 @@
                     matTooltip="Your role: creator"  matTooltipPosition="above">account_box</mat-icon>
             </div>
         </button>
-        <mat-paginator [length]="10"
+        <!-- <mat-paginator [length]="10"
             [pageSize]="5"
             (page)="pageEvent = $event">   
-        </mat-paginator>
+        </mat-paginator> -->
         <!-- <div *ngIf="pageEvent">
         </div> -->
     </div>

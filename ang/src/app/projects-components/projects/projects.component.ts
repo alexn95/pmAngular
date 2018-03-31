@@ -4,7 +4,7 @@ import { SerachTasksService } from './../../../services/serach-tasks.service';
 import { ProjectsService } from './../../../services/projects.service';
 import { AuthService } from './../../../services/auth.service';
 import { Project } from './../../../models/project';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { ProjectDeleteComponent } from './../project-delete/project-delete.component';
 import { ProjectEditComponent } from './../project-edit/project-edit.component';
 import { MatSnackBar, MatDialog, MatPaginator } from '@angular/material';
@@ -19,15 +19,9 @@ import { ProjectCreateComponent } from '../project-create/project-create.compone
 export class ProjectsComponent implements OnInit, AfterViewInit {
 
     public projects: Project[];
-
-    public title = this.builder.control('', [
-        Validators.maxLength(50)
-    ]);
-    public onlyYourProjects = this.builder.control([]);
-    public projectsSearchForm = this.builder.group({
-        title: this.title,
-        onlyYourProjects: this.onlyYourProjects,
-    });
+    public title: FormControl;
+    public onlyYourProjects: FormControl;
+    public projectsSearchForm: FormGroup;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -42,7 +36,17 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
         private serachTasksService: SerachTasksService,
         private searchProjectsService: SearchProjectsService,
         private selectedProjectsService: SelectedProjectsService,
-    ) { }
+    ) {
+        this.title = new FormControl('', [
+            Validators.maxLength(50)
+        ]);
+        this.onlyYourProjects = new FormControl(true);
+
+        this.projectsSearchForm = new FormGroup({
+            title: this.title,
+            onlyYourProjects: this.onlyYourProjects,
+        });
+    }
 
     ngOnInit() {
         this.searchProjectsService.refreshEmmiter.subscribe(event => this.searchProjects());
@@ -56,11 +60,11 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.paginator.page
-            .subscribe(e => {
-                console.log(e.pageIndex);
-                // this.projects = [this.loadProjects[e.pageIndex - 1]];
-            });
+        // this.paginator.page
+        //     .subscribe(e => {
+        //         console.log(e.pageIndex);
+        //         this.projects = [this.loadProjects[e.pageIndex - 1]];
+        //     });
     }
 
 
@@ -79,7 +83,7 @@ export class ProjectsComponent implements OnInit, AfterViewInit {
     }
 
     public searchProjects(): void {
-        if (!this.title.value) {
+        if (this.title.value === undefined) {
             this.title.setValue('');
             return;
         }

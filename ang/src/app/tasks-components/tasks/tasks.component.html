@@ -2,7 +2,7 @@
     <div class="tasks__search">
         <form [formGroup]="tasksSearchForm" class="tasks__search__form">
             <mat-form-field mode="search" class="tasks__search__form-input">
-                <input  matInput placeholder="search" name="title" id="title" [formControl]="title" 
+                <input  matInput placeholder="search" name="TaskTitle" id="TaskTitle" [formControl]="title" 
                     [errorStateMatcher]="matcher" [(ngModel)]="value">
                 <mat-error *ngIf="title.hasError('maxlength')">
                     Title can not be longer than 50 characters.
