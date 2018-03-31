@@ -7,45 +7,44 @@ import { ProjectsService } from '../../services/projects.service';
 import { Project } from '../../models/project';
 
 @Component({
-  selector: 'app-project-delete',
-  templateUrl: './project-delete.component.html'
+    selector: 'app-project-delete',
+    templateUrl: './project-delete.component.html'
 })
 export class ProjectDeleteComponent implements OnInit {
 
-  constructor(
-    private searchProjectsService: SearchProjectsService,
-    private auth: AuthService,
-    private router: Router,
-    private snackBar: MatSnackBar,
-    private projectService: ProjectsService,
-    private dialogRef: MatDialogRef<ProjectDeleteComponent>,
-    @Inject(MAT_DIALOG_DATA) private project: Project,
-  ) { }
+    constructor(
+        private searchProjectsService: SearchProjectsService,
+        private auth: AuthService,
+        private router: Router,
+        private snackBar: MatSnackBar,
+        private projectService: ProjectsService,
+        private dialogRef: MatDialogRef<ProjectDeleteComponent>,
+        @Inject(MAT_DIALOG_DATA) private project: Project,
+    ) { }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  private delete(){
-    this.projectService.deleteProject(this.project.id).subscribe(res=>{
-      if (!res){
-        this.dialogRef.close()
-        this.auth.logout()
-        this.snackBar.open("Your user session was not valid.", "close", {
-          duration: 3000,
-        }); 
-        return
-      } else {
-        this.dialogRef.close()
-        this.searchProjectsService.refresh()
-        this.snackBar.open("Project was deleted.", "close", {
-          duration: 3000,
-        }); 
-      }
-    })
-  }
+    private delete(): void {
+        this.projectService.deleteProject(this.project.id).subscribe(res => {
+            if (!res) {
+                this.dialogRef.close();
+                this.auth.logout();
+                this.snackBar.open('Your user session was not valid.', 'close', {
+                    duration: 3000,
+                });
+            } else {
+                this.dialogRef.close();
+                this.searchProjectsService.refresh();
+                this.snackBar.open('Project was deleted.', 'close', {
+                    duration: 3000,
+                });
+            }
+        });
+    }
 
-  private cancel(){
-    this.dialogRef.close();
-  }
+    private cancel(): void {
+        this.dialogRef.close();
+    }
 
 }

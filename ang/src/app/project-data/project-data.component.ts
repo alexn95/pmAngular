@@ -30,82 +30,82 @@ export class ProjectDataComponent implements OnInit, OnChanges {
     ) { }
 
     ngOnInit() {
-        this.selectedProjectsService.projectEmmiter.subscribe(project => this.project = project)
+        this.selectedProjectsService.projectEmmiter.subscribe(project => this.project = project);
     }
 
-    ngOnChanges(){
+    ngOnChanges() {
     }
 
     public editProject(): void {
-        let loginRef = this.projectEditModal.open(ProjectEditComponent,{
-            width : '90%',
-            maxWidth: '900px',
-            data: this.project
+        const loginRef = this.projectEditModal.open(ProjectEditComponent, {
+        width: '90%',
+        maxWidth: '900px',
+        data: this.project
         });
-        loginRef.afterClosed().subscribe(result =>{
-            console.log("Closed")
-        })
-    } 
+        loginRef.afterClosed().subscribe(result => {
+        console.log('Closed');
+        });
+    }
 
     public deleteProject(): void {
-        let loginRef = this.projectDeleteModal.open(ProjectDeleteComponent,{
-            width : '90%',
+        const loginRef = this.projectDeleteModal.open(ProjectDeleteComponent, {
+            width: '90%',
             maxWidth: '300px',
             data: this.project
         });
-        loginRef.afterClosed().subscribe(result =>{
-            console.log("Closed")
-        })
+        loginRef.afterClosed().subscribe(result => {
+            console.log('Closed');
+        });
     }
 
     public createTask(): void {
-        let loginRef = this.projectDeleteModal.open(TaskCreateComponent,{
-            width : '90%',
+        const loginRef = this.projectDeleteModal.open(TaskCreateComponent, {
+            width: '90%',
             maxWidth: '900px',
             data: this.project
         });
-        loginRef.afterClosed().subscribe(result =>{
-            console.log("Closed")
-        })
+        loginRef.afterClosed().subscribe(result => {
+            console.log('Closed');
+        });
     }
 
     public joinProject(): void {
-        this.projectService.joinProject(this.project.id).subscribe(res=>{
-            if (!res){
-                this.auth.logout()
-                this.snackBar.open("Your user session was not valid.", "close", {
+        this.projectService.joinProject(this.project.id).subscribe(res => {
+            if (!res) {
+                this.auth.logout();
+                this.snackBar.open('Your user session was not valid.', 'close', {
                     duration: 3000,
-                }); 
+                });
                 return;
             } else {
-                this.snackBar.open("Project was joined.", "close", {
+                this.snackBar.open('Project was joined.', 'close', {
                     duration: 3000,
                 });
                 this.project.user_role = 2;
             }
-        })
+        });
     }
 
     public leaveProject(): void {
-        this.projectService.leaveProject(this.project.id).subscribe(res=>{
-            if (!res){
-                this.auth.logout()
-                this.snackBar.open("Your user session was not valid.", "close", {
+        this.projectService.leaveProject(this.project.id).subscribe(res => {
+            if (!res) {
+                this.auth.logout();
+                this.snackBar.open('Your user session was not valid.', 'close', {
                     duration: 3000,
-                }); 
+                });
                 return;
             } else {
                 this.project.user_role = null;
-                this.snackBar.open("Project was leaved.", "close", {
+                this.snackBar.open('Project was leaved.', 'close', {
                     duration: 3000,
-                }); 
+                });
             }
-        })
+        });
     }
 
-    public getUserRole(): number{
+    public getUserRole(): number {
         let result: number;
-        if (this.project == undefined) {
+        if (this.project === undefined) {
             result = 0;
         } else if (this.project.user_role == null) {
             result = 3;

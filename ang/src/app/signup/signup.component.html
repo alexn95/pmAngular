@@ -1,33 +1,32 @@
-<div class="signup" >
+<div class="signup">
     <form  [formGroup]="signupForm" (ngSubmit)="signup()" class="signup__form">
-      <mat-form-field class="signup__form-input"   >
-        <input matInput placeholder="login" name="login" id="login" [formControl]="login" 
-        [errorStateMatcher]="matcher">
-        <mat-hint>Errors appear instantly!</mat-hint>
-        <mat-error *ngIf="login.hasError('required')">
-            Login is <strong>required</strong>
-        </mat-error>
-        <mat-error *ngIf="login.hasError('minlength')">
-            login can not be shorter than 3 characters.
-        </mat-error>
-      </mat-form-field> 
-        
-      <mat-form-field class="signup__form-input" >
-        <input matInput placeholder="password" type="password" name="password" id="password" [formControl]="password"
-        [errorStateMatcher]="matcher">
-        <mat-hint>Errors appear instantly!</mat-hint>
-        <mat-error *ngIf="password.hasError('required')">
-            Password is <strong>required</strong>
-        </mat-error>
-        <mat-error *ngIf="password.hasError('minlength')">
-            Password can not be shorter than 6 characters.
-        </mat-error>
-      </mat-form-field>
+        <mat-form-field class="signup__form-input"   >
+            <input matInput placeholder="login" name="login" id="login" [formControl]="login" 
+                [errorStateMatcher]="matcher">
+            <mat-hint>Errors appear instantly!</mat-hint>
+            <mat-error *ngIf="login.hasError('required')">
+                Login is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="login.hasError('minlength')">
+                login can not be shorter than 3 characters.
+            </mat-error>
+        </mat-form-field> 
 
-      <mat-form-field class="signup__form-input" >
+        <mat-form-field class="signup__form-input" >
+            <input matInput placeholder="password" type="password" name="password" id="password" [formControl]="password"
+                [errorStateMatcher]="matcher">
+            <mat-hint>Errors appear instantly!</mat-hint>
+            <mat-error *ngIf="password.hasError('required')">
+                Password is <strong>required</strong>
+            </mat-error>
+            <mat-error *ngIf="password.hasError('minlength')">
+                Password can not be shorter than 6 characters.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="signup__form-input" >
             <input matInput placeholder="password confirmation" type="password" name="passwordConfirm" 
-            id="passwordConfirm" [formControl]="passwordConfirm"
-            [errorStateMatcher]="matcher">
+                id="passwordConfirm" [formControl]="passwordConfirm" [errorStateMatcher]="matcher">
             <mat-hint>Errors appear instantly!</mat-hint>
             <mat-error *ngIf="passwordConfirm.hasError('required')">
                 Password is <strong>required</strong>
@@ -38,10 +37,12 @@
             <mat-error *ngIf="passwordConfirm.hasError('confirmPassword')">
                 Passwords not confirm.
             </mat-error>
-          </mat-form-field>
-       <div class="signup__form-action-row">
+        </mat-form-field>
+
+        <div class="signup__form-action-row">
             <button class="signup__form-action-row-button" type="submit" 
-            [disabled]="!signupForm.valid" mat-raised-button  color="primary">sign up</button>
-       </div> 
+                [disabled]="!signupForm.valid" mat-raised-button  color="primary">sign up
+            </button>
+        </div> 
     </form>
 </div>

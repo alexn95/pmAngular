@@ -8,43 +8,43 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class AuthService {
-  
-  constructor(
-    private httpService : HttpService,
-  ) {
-  }
 
-  public isAuthorized(): boolean {
-    return localStorage.getItem('userStatus') == 'authorized';
-  }
+    constructor(
+        private httpService: HttpService,
+    ) {
+    }
 
-  public login(login: string, pass: string) : any {
-    let data = new FormData(); 
-    data.append("login", login);
-    data.append("pass", pass); 
-    return this.httpService.post("http://pm/login.php", data)
-  }
+    public isAuthorized(): boolean {
+        return localStorage.getItem('userStatus') === 'authorized';
+    }
 
-  public logout(){
-    localStorage.removeItem("userStatus");
-    localStorage.removeItem("id");
-    localStorage.removeItem("login");
-    localStorage.removeItem("token");
-  }
+    public login(login: string, pass: string): Observable<any> {
+        const data = new FormData();
+        data.append('login', login);
+        data.append('pass', pass);
+        return this.httpService.post('http://pm/login.php', data);
+    }
 
-  public getUserData() {
-    let data = new FormData(); 
-    data.append("token", localStorage.getItem("token"));
-    data.append("id", localStorage.getItem("id"));
-    data.append("login", localStorage.getItem("login"));
-    return data;
-  }
+    public logout(): void {
+        localStorage.removeItem('userStatus');
+        localStorage.removeItem('id');
+        localStorage.removeItem('login');
+        localStorage.removeItem('token');
+    }
 
-  public signup(login: string, pass: string): any {
-    let data = new FormData(); 
-    data.append("login", login);
-    data.append("pass", pass); 
-    return this.httpService.post("http://pm/signup.php", data)
-  }
+    public getUserData(): FormData {
+        const data = new FormData();
+        data.append('token', localStorage.getItem('token'));
+        data.append('id', localStorage.getItem('id'));
+        data.append('login', localStorage.getItem('login'));
+        return data;
+    }
+
+    public signup(login: string, pass: string): Observable<any> {
+        const data = new FormData();
+        data.append('login', login);
+        data.append('pass', pass);
+        return this.httpService.post('http://pm/signup.php', data);
+    }
 
 }

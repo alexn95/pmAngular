@@ -4,13 +4,13 @@ import { Project } from '../models/project';
 @Injectable()
 export class SelectedProjectsService {
 
-  @Output() projectEmmiter: EventEmitter<Project> = new EventEmitter();
+    @Output() projectEmmiter: EventEmitter<Project> = new EventEmitter();
 
-  constructor(
-  ) { }
+    constructor(
+    ) { }
 
-  public selectProject(project: Project){
-    this.projectEmmiter.emit(project);
-  }
+    public selectProject(project: Project): void {
+        this.projectEmmiter.emit(project);
+    }
 
 }

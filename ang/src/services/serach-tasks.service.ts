@@ -5,14 +5,14 @@ import { EventEmitter } from '@angular/core';
 @Injectable()
 export class SerachTasksService {
 
-  constructor() { }
+    constructor() { }
 
-  @Output() refreshEmmiter: EventEmitter<any> = new EventEmitter();
-  
-  public refresh(){
-    this.refreshEmmiter.emit(null)
-  }
+    @Output() refreshEmmiter: EventEmitter<any> = new EventEmitter();
 
-  
+    public refresh(): void {
+        this.refreshEmmiter.emit(null);
+    }
+
+
 
 }

@@ -1,22 +1,22 @@
 <mat-toolbar color="primary" class="toolbar">
-  <mat-icon class="toolbar__home_icon">home</mat-icon>
-  <a mat-button href="/" class="toolbar__project-title">Project manager</a>
-  <span class="toolbar__space"></span>
-  <button *ngIf="isShowProjectToogle()" mat-button (click)="toggleNav()" class="toolbar__button" matTooltip="{{tooltip}}">
-      <mat-icon>{{projectsAction}}</mat-icon>
-  </button>
-  
-  <button mat-icon-button (click)="initUserAction()"  [matMenuTriggerFor]="menu">
-    <mat-icon>{{icon}}</mat-icon>
-   </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="changeUserStatus()">
-      <mat-icon>{{userActionIcon}}</mat-icon>
-      <span>{{userAction}}</span>
+    <mat-icon class="toolbar__home_icon">home</mat-icon>
+    <a mat-button href="/" class="toolbar__project-title">Project manager</a>
+    <span class="toolbar__space"></span>
+    <button *ngIf="isShowProjectToogle()" mat-button (click)="toggleNav()" class="toolbar__button" matTooltip="{{tooltip}}">
+        <mat-icon>{{projectsAction}}</mat-icon>
     </button>
-    <button mat-menu-item (click)="signup()">
-      <mat-icon>create</mat-icon>
-      <span>Sign up</span>
-    </button> 
-  </mat-menu>
+
+    <button mat-icon-button (click)="initUserAction()"  [matMenuTriggerFor]="menu">
+        <mat-icon>{{icon}}</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="changeUserStatus()">
+            <mat-icon>{{userActionIcon}}</mat-icon>
+            <span>{{userAction}}</span>
+        </button>
+        <button mat-menu-item (click)="signup()">
+            <mat-icon>create</mat-icon>
+            <span>Sign up</span>
+        </button> 
+    </mat-menu>
 </mat-toolbar>

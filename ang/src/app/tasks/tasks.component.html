@@ -1,59 +1,59 @@
 <div class="tasks">
-  <div class="tasks__search">
-      <form [formGroup]="tasksSearchForm" class="tasks__search__form">
-        <mat-form-field mode="search" class="tasks__search__form-input">
-            <input  matInput placeholder="search" name="title" id="title" [formControl]="title" 
-            [errorStateMatcher]="matcher" [(ngModel)]="value">
-            <mat-error *ngIf="title.hasError('maxlength')">
-                Title can not be longer than 50 characters.
-            </mat-error>
-            <button mat-button type="button"  *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
-              <mat-icon>close</mat-icon>
-            </button>
-        </mat-form-field>
-        <mat-checkbox formControlName="onlyProjectsTasks" [disabled]="this.project == undefined" >Only projects tasks</mat-checkbox>
-      </form>
-  </div>
-  <mat-accordion class="tasks__accordin" displayMode="default" [multi]="true" [hideToggle]="false"  
-  *ngFor="let task of tasks">
-    <mat-expansion-panel class="tasks__accordin-panel" [hideToggle]="false" #panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title class="tasks__accordin-panel-item">
-            {{task.title}}
-          </mat-panel-title>
-          <mat-panel-description class="tasks__accordin-panel-item">
-            {{task.type}}
-          </mat-panel-description>
-          <mat-panel-description class="tasks__accordin-panel-item">
-            {{task.task_state}}   
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <p class="tasks__accordin-panel-desc"> {{task.description}} </p>
-        <p class="tasks__accordin-panel-info"> 
-          <span class="tasks__accordin-panel-info-dete">{{task.create_date.date | date: 'short'}}</span>
-          <span>{{task.login}} </span>
-          <button type="button" (click)="selectProject(task.project_id)" mat-button>{{task.project_title}}</button>
-        </p>     
-        <mat-action-row >  
-          <button *ngIf="getUserRole(task) <= 2 && isTaskFree(task)" mat-icon-button (click)="takeTask(task)" >
-            <mat-icon color="primary" matTooltip="Take" matTooltipPosition="above">add_boxe</mat-icon>
-          </button>
-          <button *ngIf="getUserRole(task) <= 2 && isTakedTask(task)" mat-icon-button (click)="leaveTask(task)" >
-            <mat-icon color="primary" matTooltip="Leave" matTooltipPosition="above">remove_circle</mat-icon>
-          </button>
-          <button *ngIf="getUserRole(task) <= 1" mat-icon-button (click)="editTask(task)" >
-            <mat-icon color="primary" matTooltip="Edit" matTooltipPosition="above">mode_edit</mat-icon>
-          </button>
-          <button *ngIf="getUserRole(task) <= 1" mat-icon-button (click)="deleteTask(task)">
-            <mat-icon color="warn"  matTooltip="Delete"  matTooltipPosition="above">delete_forever</mat-icon>
-          </button>
-          <button mat-icon-button (click)="panel.expanded = false">
-            <mat-icon color="primary"  matTooltip="Close"  matTooltipPosition="above">clear</mat-icon>
-          </button>
-        </mat-action-row>
-    </mat-expansion-panel>
-  </mat-accordion> 
-
+    <div class="tasks__search">
+        <form [formGroup]="tasksSearchForm" class="tasks__search__form">
+            <mat-form-field mode="search" class="tasks__search__form-input">
+                <input  matInput placeholder="search" name="title" id="title" [formControl]="title" 
+                    [errorStateMatcher]="matcher" [(ngModel)]="value">
+                <mat-error *ngIf="title.hasError('maxlength')">
+                    Title can not be longer than 50 characters.
+                </mat-error>
+                <button mat-button type="button"  *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="value=''">
+                    <mat-icon>close</mat-icon>
+                </button>
+            </mat-form-field>
+            <!-- <mat-checkbox formControlName="onlyTakedTasks" matTooltip="Only taked tasks"  matTooltipPosition="above">
+            </mat-checkbox> -->
+            <mat-checkbox formControlName="onlyProjectsTasks"  matTooltip="only project's tasks"  matTooltipPosition="above"
+                [disabled]="this.project == undefined" > </mat-checkbox>
+        </form>
+    </div>
+    <mat-accordion class="tasks__accordin" displayMode="default" [multi]="true" [hideToggle]="false"  
+            *ngFor="let task of tasks">
+        <mat-expansion-panel class="tasks__accordin-panel" [hideToggle]="false" #panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title class="tasks__accordin-panel-item">
+                    {{task.title}}
+                </mat-panel-title>
+                <mat-panel-description class="tasks__accordin-panel-item">
+                    {{task.type}}
+                </mat-panel-description>
+                <mat-panel-description class="tasks__accordin-panel-item">
+                    {{task.task_state}}   
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p class="tasks__accordin-panel-desc"> {{task.description}} </p>
+            <p class="tasks__accordin-panel-info"> 
+            <span class="tasks__accordin-panel-info-dete">{{task.create_date.date | date: 'short'}}</span>
+            <span>{{task.login}} </span>
+            <button type="button" (click)="selectProject(task.project_id)" mat-button>{{task.project_title}}</button>
+            </p>     
+            <mat-action-row >  
+                <button *ngIf="getUserRole(task) <= 2 && isTaskFree(task)" mat-icon-button (click)="takeTask(task)" >
+                    <mat-icon color="primary" matTooltip="Take" matTooltipPosition="above">add_boxe</mat-icon>
+                </button>
+                <button *ngIf="getUserRole(task) <= 2 && isTakedTask(task)" mat-icon-button (click)="leaveTask(task)" >
+                    <mat-icon color="primary" matTooltip="Leave" matTooltipPosition="above">remove_circle</mat-icon>
+                </button>
+                <button *ngIf="getUserRole(task) <= 1" mat-icon-button (click)="editTask(task)" >
+                    <mat-icon color="primary" matTooltip="Edit" matTooltipPosition="above">mode_edit</mat-icon>
+                </button>
+                <button *ngIf="getUserRole(task) <= 1" mat-icon-button (click)="deleteTask(task)">
+                    <mat-icon color="warn"  matTooltip="Delete"  matTooltipPosition="above">delete_forever</mat-icon>
+                </button>
+                <button mat-icon-button (click)="panel.expanded = false">
+                    <mat-icon color="primary"  matTooltip="Close"  matTooltipPosition="above">clear</mat-icon>
+                </button>
+            </mat-action-row>
+        </mat-expansion-panel>
+    </mat-accordion> 
 </div>
-
-

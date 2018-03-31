@@ -4,14 +4,13 @@ import { CanActivate } from '@angular/router';
 
 
 @Injectable()
-export class IsAuthorized implements CanActivate{
+export class IsAuthorized implements CanActivate {
 
-    constructor( private auth : AuthService ){
+    constructor(private auth: AuthService) {
     }
 
-    canActivate(){
-        return localStorage.getItem('userStatus') == 'authorized';
+    canActivate() {
+        return localStorage.getItem('userStatus') === 'authorized';
     }
 
 }
- 

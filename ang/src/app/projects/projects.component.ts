@@ -4,11 +4,11 @@ import { SearchProjectsService } from './../../services/search-projects.service'
 import { SerachTasksService } from './../../services/serach-tasks.service';
 import { ProjectDeleteComponent } from './../project-delete/project-delete.component';
 import { ProjectEditComponent } from './../project-edit/project-edit.component';
-import { MatSnackBar, MatDialog } from '@angular/material';
+import { MatSnackBar, MatDialog, MatPaginator } from '@angular/material';
 import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
 import { Project } from './../../models/project';
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, AfterViewInit, ViewChild } from '@angular/core';
 import { ProjectsService } from '../../services/projects.service';
 import { TaskCreateComponent } from '../task-create/task-create.component';
 import { ProjectCreateComponent } from '../project-create/project-create.component';
@@ -17,20 +17,22 @@ import { ProjectCreateComponent } from '../project-create/project-create.compone
     selector: 'app-projects',
     templateUrl: './projects.component.html'
 })
-export class ProjectsComponent implements OnInit {
+export class ProjectsComponent implements OnInit, AfterViewInit {
 
     public projects: Project[];
 
-    public title =  this.builder.control('', [
+    public title = this.builder.control('', [
         Validators.maxLength(50)
     ]);
     public onlyYourProjects = this.builder.control([]);
     public projectsSearchForm = this.builder.group({
-        title : this.title,
+        title: this.title,
         onlyYourProjects: this.onlyYourProjects,
     });
 
-    constructor( 
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+
+    constructor(
         private builder: FormBuilder,
         private router: Router,
         private projectEditModal: MatDialog,
@@ -44,48 +46,55 @@ export class ProjectsComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-
-        this.searchProjectsService.refreshEmmiter.subscribe(event => this.searchProjects())
+        this.searchProjectsService.refreshEmmiter.subscribe(event => this.searchProjects());
         this.projectsSearchForm.valueChanges
             .debounceTime(800)
-            .subscribe((val) =>{
+            .subscribe((val) => {
                 console.log('valueChanges');
                 this.searchProjects();
-            })
+            });
         this.searchProjects();
     }
 
+    ngAfterViewInit() {
+        this.paginator.page
+            .subscribe(e => {
+                console.log(e.pageIndex);
+                // this.projects = [this.loadProjects[e.pageIndex - 1]];
+            });
+    }
 
-    private showProject(project: Project) {
+
+    private showProject(project: Project): void {
         this.selectedProjectsService.selectProject(project);
     }
 
-    public createProject(){
-        let loginRef = this.projectDeleteModal.open(ProjectCreateComponent,{
-            width : '90%',
+    public createProject(): void {
+        const loginRef = this.projectDeleteModal.open(ProjectCreateComponent, {
+            width: '90%',
             maxWidth: '700px',
         });
-        loginRef.afterClosed().subscribe(result =>{
-            console.log("Closed")
-        })
+        loginRef.afterClosed().subscribe(result => {
+            console.log('Closed');
+        });
     }
 
-    public searchProjects(){
-        if (this.title.value == undefined) {
+    public searchProjects(): void {
+        if (!this.title.value) {
             this.title.setValue('');
             return;
         }
         this.projectsService.searchProjects(this.title.value, this.onlyYourProjects.value).subscribe((res) => {
-            console.log(res)
-            if (!res){
-                this.auth.logout()
-                this.snackBar.open("Your user session was not valid.", "close", {
+            console.log(res);
+            if (!res) {
+                this.auth.logout();
+                this.snackBar.open('Your user session was not valid.', 'close', {
                     duration: 3000,
-                }); 
-                return
+                });
+                return;
             }
             this.projects = res as Project[];
-        })
+        });
     }
 
     private getUserRole(project: Project): number {

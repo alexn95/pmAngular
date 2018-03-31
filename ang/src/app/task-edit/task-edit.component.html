@@ -1,8 +1,8 @@
 <div class="task-edit">
-  <form [formGroup]="TaskEditForm" (ngSubmit)="save()" class="task-edit__form">
+    <form [formGroup]="TaskEditForm" (ngSubmit)="save()" class="task-edit__form">
         <mat-form-field class="task-edit__form-input">
             <input matInput placeholder="Title" name="title" id="title" [formControl]="title" 
-            [errorStateMatcher]="matcher">
+                [errorStateMatcher]="matcher">
             <mat-error *ngIf="title.hasError('required')">
                 Title is <strong>required</strong>
             </mat-error>
@@ -13,7 +13,7 @@
                 Title can not be longer than 50 characters.
             </mat-error>
         </mat-form-field>
-        
+            
         <mat-form-field class="task-edit__form-input">
             <input matInput placeholder="Task type" name="type" id="type" [formControl]="type" 
             [errorStateMatcher]="matcher">
@@ -27,12 +27,11 @@
                 Type can not be longer than 20 characters.
             </mat-error>
         </mat-form-field>
-        
 
         <mat-form-field class="task-edit__form-textarea">
             <textarea matInput placeholder="Description" matTextareaAutosize matAutosizeMinRows="1"
-                      matAutosizeMaxRows="8" name="description" id="description" [formControl]="description"
-                      [errorStateMatcher]="matcher"></textarea>
+                    matAutosizeMaxRows="8" name="description" id="description" [formControl]="description"
+                    [errorStateMatcher]="matcher"></textarea>
             <mat-error *ngIf="description.hasError('minlength')">
                 Description can not be shorter than 3 characters.
             </mat-error>
@@ -40,26 +39,26 @@
                 Description can not be longer than 1000 characters.
             </mat-error>
         </mat-form-field>
-             <mat-form-field class="task-edit__form-input" >
-                <mat-select placeholder="User" name="user" id="user" [formControl]="user" >
-                    <mat-option [value]="null">None</mat-option>
-                    <mat-option *ngFor="let user of projectUsers" [value]="user.id">
-                        {{ user.login }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-            <mat-form-field class="task-edit__form-input" >
-                <mat-select placeholder="State" name="state" id="state" [formControl]="state" >
-                    <mat-option *ngFor="let state of stateTypes" [value]="state">
-                        {{ state }}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+        <mat-form-field class="task-edit__form-input" >
+            <mat-select placeholder="User" name="user" id="user" [formControl]="user" >
+                <mat-option [value]="null">None</mat-option>
+                <mat-option *ngFor="let user of projectUsers" [value]="user.id">
+                    {{ user.login }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field class="task-edit__form-input" >
+            <mat-select placeholder="State" name="state" id="state" [formControl]="state" >
+                <mat-option *ngFor="let state of stateTypes" [value]="state">
+                    {{ state }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+            
+        <div class="task-edit__form-buttons">
+            <button mat-button type="submit" [disabled]="!TaskEditForm.valid"  color="primary">Save</button>
+            <button mat-button type="button" (click)="cancel()"  color="warn">Cancel</button>
+        </div>
         
-      <div class="task-edit__form-buttons">
-        <button mat-button type="submit" [disabled]="!TaskEditForm.valid"  color="primary">Save</button>
-        <button mat-button type="button" (click)="cancel()"  color="warn">Cancel</button>
-      </div>
-      
-  </form>
+    </form>
 </div>

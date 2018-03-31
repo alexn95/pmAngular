@@ -10,15 +10,13 @@ import { SidenavService } from '../../services/sidenav.service';
 })
 export class HomeComponent implements OnInit {
 
-
     @ViewChild('projectsNav') public projectsNav: MatSidenav;
-        constructor(
+
+    constructor(
         private sidenavService: SidenavService
-    ) {}
+    ) { }
 
     ngOnInit() {
         this.sidenavService.sidenav = this.projectsNav;
     }
-
 }
- 
