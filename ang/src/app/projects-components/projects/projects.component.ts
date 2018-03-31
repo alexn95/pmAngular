@@ -1,16 +1,15 @@
+import { SelectedProjectsService } from './../../../services/selected-project.service';
+import { SearchProjectsService } from './../../../services/search-projects.service';
+import { SerachTasksService } from './../../../services/serach-tasks.service';
+import { ProjectsService } from './../../../services/projects.service';
+import { AuthService } from './../../../services/auth.service';
+import { Project } from './../../../models/project';
 import { FormBuilder, Validators } from '@angular/forms';
-import { SelectedProjectsService } from './../../services/selected-project.service';
-import { SearchProjectsService } from './../../services/search-projects.service';
-import { SerachTasksService } from './../../services/serach-tasks.service';
 import { ProjectDeleteComponent } from './../project-delete/project-delete.component';
 import { ProjectEditComponent } from './../project-edit/project-edit.component';
 import { MatSnackBar, MatDialog, MatPaginator } from '@angular/material';
-import { AuthService } from './../../services/auth.service';
 import { Router } from '@angular/router';
-import { Project } from './../../models/project';
 import { Component, OnInit, Output, EventEmitter, AfterViewInit, ViewChild } from '@angular/core';
-import { ProjectsService } from '../../services/projects.service';
-import { TaskCreateComponent } from '../task-create/task-create.component';
 import { ProjectCreateComponent } from '../project-create/project-create.component';
 
 @Component({

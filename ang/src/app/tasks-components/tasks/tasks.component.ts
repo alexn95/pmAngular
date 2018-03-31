@@ -1,19 +1,19 @@
+import { SelectedProjectsService } from './../../../services/selected-project.service';
+import { ProjectsService } from './../../../services/projects.service';
+import { SerachTasksService } from './../../../services/serach-tasks.service';
+import { AuthService } from './../../../services/auth.service';
+import { TaskService } from './../../../services/task.service';
+import { Project } from './../../../models/project';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
-import { ProjectsService } from './../../services/projects.service';
-import { SelectedProjectsService } from './../../services/selected-project.service';
-import { Project } from './../../models/project';
-import { SerachTasksService } from './../../services/serach-tasks.service';
 import { TaskDeleteComponent } from './../task-delete/task-delete.component';
-import { AuthService } from './../../services/auth.service';
 import { TaskEditComponent } from './../task-edit/task-edit.component';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { Task } from './../../models/task';
-import { TaskService } from './../../services/task.service';
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import { resolve } from 'q';
+import { Task } from '../../../models/task';
 
 
 @Component({

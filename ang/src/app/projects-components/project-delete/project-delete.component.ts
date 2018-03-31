@@ -1,10 +1,10 @@
-import { SearchProjectsService } from './../../services/search-projects.service';
+import { Project } from './../../../models/project';
+import { ProjectsService } from './../../../services/projects.service';
+import { AuthService } from './../../../services/auth.service';
+import { SearchProjectsService } from './../../../services/search-projects.service';
 import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
-import { AuthService } from './../../services/auth.service';
 import { Component, OnInit, Inject } from '@angular/core';
-import { ProjectsService } from '../../services/projects.service';
-import { Project } from '../../models/project';
 
 @Component({
     selector: 'app-project-delete',

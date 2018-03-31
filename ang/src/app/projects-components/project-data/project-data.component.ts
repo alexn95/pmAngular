@@ -1,14 +1,13 @@
-import { SelectedProjectsService } from './../../services/selected-project.service';
-import { ProjectCreateComponent } from './../project-create/project-create.component';
-import { TaskCreateComponent } from './../task-create/task-create.component';
-import { ProjectDeleteComponent } from './../project-delete/project-delete.component';
-import { ProjectEditComponent } from './../project-edit/project-edit.component';
-import { ProjectsService } from './../../services/projects.service';
-import { AuthService } from './../../services/auth.service';
+import { SelectedProjectsService } from './../../../services/selected-project.service';
+import { ProjectsService } from './../../../services/projects.service';
+import { AuthService } from './../../../services/auth.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
-import { Project } from '../../models/project';
+import { Project } from '../../../models/project';
+import { ProjectEditComponent } from '../project-edit/project-edit.component';
+import { ProjectDeleteComponent } from '../project-delete/project-delete.component';
+import { TaskCreateComponent } from '../../tasks-components/task-create/task-create.component';
 
 @Component({
     selector: 'app-project-data',

@@ -1,10 +1,10 @@
-import { SerachTasksService } from './../../services/serach-tasks.service';
-import { AuthService } from './../../services/auth.service';
+import { TaskService } from './../../../services/task.service';
+import { AuthService } from './../../../services/auth.service';
+import { SerachTasksService } from './../../../services/serach-tasks.service';
 import { Router } from '@angular/router';
-import { TaskService } from './../../services/task.service';
 import { MAT_DIALOG_DATA, MatDialogRef, MatSnackBar } from '@angular/material';
-import { Task } from './../../models/task';
 import { Component, OnInit, Inject } from '@angular/core';
+import { Task } from '../../../models/task';
 
 @Component({
     selector: 'app-task-delete',

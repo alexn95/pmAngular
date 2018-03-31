@@ -1,13 +1,14 @@
-import { ProjectsService } from './../../services/projects.service';
-import { SerachTasksService } from './../../services/serach-tasks.service';
-import { User } from './../../models/user';
-import { FormErrorStateMatcher } from './../../models/form-error-state-matcher';
-import { Project } from './../../models/project';
-import { AuthService } from './../../services/auth.service';
+import { Project } from './../../../models/project';
+import { AuthService } from './../../../services/auth.service';
+import { ProjectsService } from './../../../services/projects.service';
+import { TaskService } from './../../../services/task.service';
+import { SerachTasksService } from './../../../services/serach-tasks.service';
+import { User } from './../../../models/user';
+import { FormErrorStateMatcher } from './../../../models/form-error-state-matcher';
 import { Router } from '@angular/router';
 import { MatDialogRef, MatSnackBar, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormControl, Validators, FormGroup } from '@angular/forms';
-import { TaskService } from './../../services/task.service';
+
 import { Component, OnInit, Inject } from '@angular/core';
 
 @Component({

@@ -1,10 +1,10 @@
-import { SearchProjectsService } from './../../services/search-projects.service';
-import { FormErrorStateMatcher } from './../../models/form-error-state-matcher';
-import { AuthService } from './../../services/auth.service';
+import { SearchProjectsService } from '.././../../services/search-projects.service';
+import { FormErrorStateMatcher } from './../../../models/form-error-state-matcher';
+import { AuthService } from './../../../services/auth.service';
 import { MatSnackBar, MatDialogRef } from '@angular/material';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
-import { ProjectsService } from './../../services/projects.service';
+import { ProjectsService } from './../../../services/projects.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

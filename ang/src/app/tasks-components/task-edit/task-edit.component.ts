@@ -1,13 +1,13 @@
-import { ProjectsService } from './../../services/projects.service';
-import { AuthService } from './../../services/auth.service';
-import { User } from './../../models/user';
-import { TaskService } from './../../services/task.service';
-import { FormErrorStateMatcher } from './../../models/form-error-state-matcher';
+import { ProjectsService } from './../../../services/projects.service';
+import { TaskService } from './../../../services/task.service';
+import { AuthService } from './../../../services/auth.service';
+import { User } from './../../../models/user';
+import { FormErrorStateMatcher } from './../../../models/form-error-state-matcher';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Component, OnInit, Inject } from '@angular/core';
-import { Task } from '../../models/task';
+import { Task } from '../../../models/task';
 
 @Component({
     selector: 'app-task-edit',

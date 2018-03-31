@@ -1,13 +1,12 @@
-import { SearchProjectsService } from './../../services/search-projects.service';
-import { SerachTasksService } from './../../services/serach-tasks.service';
-import { FormErrorStateMatcher } from './../../models/form-error-state-matcher';
-import { ProjectsService } from './../../services/projects.service';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { AuthService } from './../../services/auth.service';
+import { Project } from './../../../models/project';
+import { AuthService } from './../../../services/auth.service';
+import { ProjectsService } from './../../../services/projects.service';
+import { SearchProjectsService } from './../../../services/search-projects.service';
+import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { FormErrorStateMatcher } from './../../../models/form-error-state-matcher';
 import { Router } from '@angular/router';
 import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Component, OnInit, Inject } from '@angular/core';
-import { Project } from '../../models/project';
 
 @Component({
     selector: 'app-project-edit',

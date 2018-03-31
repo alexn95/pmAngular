@@ -1,5 +1,4 @@
 import { Router } from '@angular/router';
-import { IsAuthorized } from './../../models/is-authorized';
 import { SignupComponent } from './../signup/signup.component';
 
 import { AuthService } from './../../services/auth.service';
