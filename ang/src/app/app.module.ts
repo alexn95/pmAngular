@@ -1,3 +1,6 @@
+
+import { ProjectCreateComponent } from './projects-components/project-create/project-create.component';
+import { ProjectEditComponent } from './projects-components/project-edit/project-edit.component';
 import { SelectedProjectsService } from './../services/selected-project.service';
 import { SearchProjectsService } from './../services/search-projects.service';
 import { ProjectsService } from './../services/projects.service';
@@ -12,7 +15,6 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
 import { HttpModule } from '@angular/http';
-import { TasksComponent } from './tasks/tasks.component';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TaskService } from '../services/task.service';
 import { LoginComponent } from './login/login.component';
@@ -49,20 +51,20 @@ import {
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { routing } from './app.routes';
 import { HomeComponent } from './home/home.component';
-import { ProjectsComponent } from './projects/projects.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { IsAuthorized } from '../models/is-authorized';
-import { TaskEditComponent } from './task-edit/task-edit.component';
 import { GuestPageComponent } from './guest-page/guest-page.component';
 import { SidenavService } from '../services/sidenav.service';
-import { ProjectEditComponent } from './project-edit/project-edit.component';
-import { TaskDeleteComponent } from './task-delete/task-delete.component';
-import { ProjectDeleteComponent } from './project-delete/project-delete.component';
-import { TaskCreateComponent } from './task-create/task-create.component';
-import { ProjectCreateComponent } from './project-create/project-create.component';
 import { SerachTasksService } from '../services/serach-tasks.service';
-import { ProjectComponent } from './project/project.component';
-import { ProjectDataComponent } from './project-data/project-data.component';
+import { TasksComponent } from './tasks-components/tasks/tasks.component';
+import { ProjectsComponent } from './projects-components/projects/projects.component';
+import { TaskEditComponent } from './tasks-components/task-edit/task-edit.component';
+import { TaskDeleteComponent } from './tasks-components/task-delete/task-delete.component';
+import { ProjectDeleteComponent } from './projects-components/project-delete/project-delete.component';
+import { TaskCreateComponent } from './tasks-components/task-create/task-create.component';
+import { ProjectComponent } from './projects-components/project/project.component';
+import { ProjectDataComponent } from './projects-components/project-data/project-data.component';
+import { IsAuthorized } from '../services/is-authorized';
+
 
 
 @NgModule({
