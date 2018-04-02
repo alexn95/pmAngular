@@ -1,12 +1,15 @@
 .project {
-    height: 600px;
-    overflow: auto;
-
-    &__tasks-card{
+    height: 90vh;
+    overflow: auto; 
+    display: flex;
+    flex-direction: column;
+    
+    &__tasks-card {
+        flex: 1 1 auto;
         margin: 10px;
         padding: 10px !important;
     }
-    &__data-card{
+    &__data-card {
         margin: 10px;
         padding: 10px !important;
     }

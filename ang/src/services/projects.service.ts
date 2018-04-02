@@ -11,10 +11,12 @@ export class ProjectsService {
         private httpService: HttpService,
     ) { }
 
-    public searchProjects(title: string, onlyUserProjects: boolean): Observable<any> {
+    public searchProjects(title: string, onlyUserProjects: boolean, ofset: number, count: number): Observable<any> {
         const data = this.auth.getUserData();
         data.append('onlyUserProjects', String(onlyUserProjects));
         data.append('title', title);
+        data.append('ofset', String(ofset));
+        data.append('count', String(count));
         return this.httpService.post('http://pm/projects.php', data);
     }
 
@@ -38,33 +40,33 @@ export class ProjectsService {
         return this.httpService.post('http://pm/editProject.php', data);
     }
 
-    public deleteProject(projectId: string): Observable<any> {
+    public deleteProject(projectId: number): Observable<any> {
         const data = this.auth.getUserData();
-        data.append('projectId', projectId);
+        data.append('projectId', String(projectId));
         return this.httpService.post('http://pm/deleteProject.php', data);
     }
 
-    public getProjectById(projectId: string): Observable<any> {
+    public getProjectById(projectId: number): Observable<any> {
         const data = this.auth.getUserData();
-        data.append('projectId', projectId);
+        data.append('projectId', String(projectId));
         return this.httpService.post('http://pm/projectById.php', data);
     }
 
-    public leaveProject(projectId: string): Observable<any> {
+    public leaveProject(projectId: number): Observable<any> {
         const data = this.auth.getUserData();
-        data.append('projectId', projectId);
+        data.append('projectId', String(projectId));
         return this.httpService.post('http://pm/leaveProject.php', data);
     }
 
-    public joinProject(projectId: string): Observable<any> {
+    public joinProject(projectId: number): Observable<any> {
         const data = this.auth.getUserData();
-        data.append('projectId', projectId);
+        data.append('projectId', String(projectId));
         return this.httpService.post('http://pm/joinProject.php', data);
     }
 
-    public getProjectUsers(projId: string): Observable<any> {
+    public getProjectUsers(projId: number): Observable<any> {
         const data = this.auth.getUserData();
-        data.append('projId', projId);
+        data.append('projId', String(projId));
         return this.httpService.post('http://pm/projectUsers.php', data);
     }
 

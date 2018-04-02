@@ -14,10 +14,16 @@ export class TaskService {
         private httpService: HttpService,
     ) { }
 
-    public searchTasks(title: string, projId): Observable<any> {
+    public searchTasks( projId: number, title: string, state: string, onlyYourTask: boolean,
+                        ofset: number, count: number): Observable<any> {
         const data = this.auth.getUserData();
-        data.append('projId', projId);
+        data.append('projId', String(projId));
         data.append('title', title);
+        data.append('state', state);
+        data.append('onlyYourTask', String(onlyYourTask));
+        data.append('ofset', String(ofset));
+        data.append('count', String(count));
+        console.log(projId, title, state, onlyYourTask, ofset, count);
         return this.httpService.post('http://pm/tasks.php', data);
     }
 
@@ -31,9 +37,9 @@ export class TaskService {
         return this.httpService.post('http://pm/editTask.php', data);
     }
 
-    public deleteTask(taskId): Observable<any> {
+    public deleteTask(taskId: number): Observable<any> {
         const data = this.auth.getUserData();
-        data.append('taskId', taskId);
+        data.append('taskId', String(taskId));
         return this.httpService.post('http://pm/deleteTask.php', data);
     }
 
@@ -47,15 +53,15 @@ export class TaskService {
         return this.httpService.post('http://pm/createTask.php', data);
     }
 
-    public takeTask(taskId): Observable<any> {
+    public takeTask(taskId: number): Observable<any> {
         const data = this.auth.getUserData();
-        data.append('taskId', taskId);
+        data.append('taskId', String(taskId));
         return this.httpService.post('http://pm/takeTask.php', data);
     }
 
-    public leaveTask(taskId): Observable<any> {
+    public leaveTask(taskId: number): Observable<any> {
         const data = this.auth.getUserData();
-        data.append('taskId', taskId);
+        data.append('taskId', String(taskId));
         return this.httpService.post('http://pm/leaveTask.php', data);
     }
 

@@ -79,9 +79,10 @@ function saveNewTask($conn, $data){
     return $result;
 }
 
-function searchTasks($conn, $projId, $title, $userId){
-    $query = "EXEC searchTasks @projectId = ?, @title = ?, @userId = ?;";
-    $params = array($projId, $title, $userId);
+function searchTasks($conn, $projId, $title, $state, $userId, $onlyYourTask, $ofset, $count){
+    $query = "EXEC searchTasks  @projectId = ?, @title = ?, @state = ?,  @userId = ?, 
+                                @onlyYourTask = ?, @ofset = ?, @count = ?";
+    $params = array($projId, $title, $state, $userId, $onlyYourTask, $ofset, $count);
     $stmt = sqlsrv_query( $conn, $query, $params);
     if( $stmt === false ) {
         die( print_r( sqlsrv_errors(), true));

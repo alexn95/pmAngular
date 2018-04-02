@@ -7,8 +7,8 @@ import { Project } from './../../../models/project';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { TaskDeleteComponent } from './../task-delete/task-delete.component';
 import { TaskEditComponent } from './../task-edit/task-edit.component';
-import { MatDialog, MatSnackBar } from '@angular/material';
-import { Component, OnInit, Input, OnChanges } from '@angular/core';
+import { MatDialog, MatSnackBar, MatPaginator } from '@angular/material';
+import { Component, OnInit, Input, OnChanges, AfterViewInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -20,15 +20,27 @@ import { Task } from '../../../models/task';
     selector: 'app-tasks',
     templateUrl: './tasks.component.html'
 })
-export class TasksComponent implements OnInit {
+export class TasksComponent implements OnInit, AfterViewInit {
+
+    public space = '';
 
     public project: Project;
     public tasks: Task[];
+    public paginateTasks: Task[];
+    public stateTypes: string[];
 
+    public tasksConunt: number;
+    public paginatePageSize: number;
+    public paginateSize: number;
+    public hasAllTasks: boolean;
+
+    public state: FormControl;
     public title: FormControl;
     public onlyProjectsTasks: FormControl;
-    // public onlyTakedTasks: FormControl;
+    public onlyYourTasks: FormControl;
     public tasksSearchForm: FormGroup;
+
+    @ViewChild(MatPaginator) paginator: MatPaginator;
 
     constructor(
         private builder: FormBuilder,
@@ -46,10 +58,26 @@ export class TasksComponent implements OnInit {
             Validators.maxLength(50)
         ]);
         this.onlyProjectsTasks = new FormControl(null);
+        this.onlyYourTasks = new FormControl(false);
+        this.state = new FormControl('');
         this.tasksSearchForm = new FormGroup({
             title: this.title,
             onlyProjectsTasks: this.onlyProjectsTasks,
+            onlyYourTasks: this.onlyYourTasks,
+            state: this.state
         });
+        this.stateTypes = [
+            'open',
+            'complete',
+            'in progress',
+            'taken',
+            'to verify',
+            'close'
+        ];
+        this.hasAllTasks = false;
+        this.tasksConunt = 0;
+        this.paginateSize = 50;
+        this.paginatePageSize = 6;
     }
 
     ngOnInit() {
@@ -68,23 +96,58 @@ export class TasksComponent implements OnInit {
         this.searchTasks();
     }
 
-    private searchTasks(): void {
+    ngAfterViewInit() {
+        this.initPaginate();
+    }
+
+    private initPaginate(): void {
+        this.paginator.page
+        .subscribe(e => {
+            const end = ((e.pageIndex + 1) * this.paginatePageSize);
+            const start = end - e.pageSize;
+            // console.log(start, end);
+            // console.log((end + this.paginatePageSize) + ' > ' + this.projectsConunt);
+            if ((end + this.paginatePageSize) > this.tasksConunt && !this.hasAllTasks) {
+                this.searchTasks(this.tasksConunt);
+            }
+            this.paginateTasks = this.tasks.slice(start, end);
+        });
+    }
+
+    private searchTasks(ofset: number = 0): void {
         if (this.title.value === undefined) {
             this.title.setValue('');
             return;
         }
-        const projId = this.onlyProjectsTasks.value && this.project !== undefined ? this.project.id : '';
-        this.taskService.searchTasks(this.title.value.trim(), projId).subscribe((res) => {
-            console.log(res);
-            if (!res) {
-                this.auth.logout();
-                this.snackBar.open('Your user session was not valid.', 'close', {
-                duration: 3000,
-                });
-            } else {
-                this.tasks = res as Task[];
-            }
-        });
+        const projId = this.onlyProjectsTasks.value && this.project !== undefined ? this.project.id : -1;
+        this.taskService.searchTasks(
+                projId,
+                this.title.value.trim(),
+                this.state.value,
+                this.onlyYourTasks.value,
+                ofset,
+                this.paginateSize)
+            .subscribe((res) => {
+                console.log(res);
+                if (!res) {
+                    this.auth.logout();
+                    this.snackBar.open('Your user session was not valid.', 'close', {
+                    duration: 3000,
+                    });
+                } else {
+                    const newTasks = res as Task[];
+                    if (ofset === 0) {
+                        this.tasks = newTasks;
+                        this.paginateTasks = this.tasks.slice(ofset, this.paginatePageSize);
+                        this.paginator.firstPage();
+                    } else {
+                        this.tasks = this.tasks.concat(newTasks);
+                        console.log(this.tasks);
+                    }
+                    this.tasksConunt = this.tasks.length;
+                    this.hasAllTasks = newTasks.length === 0 || (this.tasksConunt % this.paginatePageSize) !== 0;
+                }
+            });
     }
 
 

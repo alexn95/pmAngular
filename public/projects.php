@@ -13,7 +13,12 @@ if (!isValidToken($_POST)){
 } 
 
 $conn = MSSConnect();
-$result = searchProjects($conn, $_POST['onlyUserProjects'], $_POST['title'], $_POST['id']);
+$result = searchProjects($conn, 
+            $_POST['onlyUserProjects'], 
+            $_POST['title'], 
+            $_POST['id'], 
+            $_POST['ofset'], 
+            $_POST['count']);
 
 $jsonData = json_encode($result);
 echo($jsonData);

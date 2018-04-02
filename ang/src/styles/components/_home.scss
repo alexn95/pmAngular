@@ -1,12 +1,18 @@
 .home { 
-    background-color: white;
+    background-color: white; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
     &__projectsNav{
+        height: 90vh;
+        overflow: auto;
         width: 20%;
         min-width: 350px;
        
         @media (max-width: 700px) {
             width: 100%;
-            
         }
     }
     &__tasksNav{

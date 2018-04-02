@@ -1,6 +1,8 @@
 .projects { 
     margin: 10px;
-
+    height: 80vh;
+    display: flex; 
+    flex-direction: column;
 
     &__search {
         &__form {
@@ -11,20 +13,32 @@
             }
         }
     }
+    &__content {
+        flex: 1 1 auto;
+        display: flex; 
+        flex-direction: column;
+        justify-content: space-between;
 
-    &__list {
-        display: flex ; 
-        flex-direction: column ;
-        justify-content: flex-start ;
-        align-items: stretch ;
-        &-item {
-            display: flex !important; 
-            flex-direction: row ;
-            justify-content: space-between;
-            align-items: center;
-            &-icon{
-                color: dimgray;
+        &__list {
+            display: flex; 
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: stretch;
+            &-item {
+                display: flex !important; 
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                &-icon{
+                    color: dimgray;
+                }
             }
         }
+
+        &__paginator {
+
+        }
     }
+
+    
 }

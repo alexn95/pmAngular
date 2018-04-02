@@ -1,0 +1,26 @@
+.guest-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__greating {
+        font-size: 24px;
+        padding: 20px;
+        margin: 40px 0 0 0;
+    }
+
+    &__info {
+        font-size: 20px;
+        padding: 10px;
+    }
+    
+
+    &__signup {
+        padding: 10px;
+    }
+
+    &__login {
+        padding: 10px;
+    }
+}

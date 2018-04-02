@@ -1,4 +1,6 @@
 .tasks {
+    display: flex; 
+    flex-direction: column;
 
     &__search {
         display: flex;
@@ -8,38 +10,57 @@
         &__form {
             &-input {
                 padding: 0 20px;
-                width: 300px;
+                width: 250px;
+            }
+            &-select {
+                padding: 0 20px;
+                width: 150px;
+            }
+            &-checkbox {
+                padding: 0 10px;
             }
         }
     }
 
-    &__accordin{
-        display: flex;
+    &__content {
+        flex: 1 1 auto;
+        display: flex; 
         flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        margin: 10px;
-        &-panel{
-            max-width: 1000px ;
-            width: 100%;
-            &-item{
-                display: inline-flex;
-                align-items: center;
-            }
-            &-info{
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-                align-items: center;
-                &-dete{
-                    color: rgba(0,0,0,0.54);
-                    font-size: 13px;
+        justify-content: space-between;
+
+        &__accordin {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 10px;
+            &-panel{
+                max-width: 1000px ;
+                width: 100%;
+                &-item{
+                    display: inline-flex;
+                    align-items: center;
                 }
+                &-info{
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    align-items: center;
+                    &-dete{
+                        color: rgba(0,0,0,0.54);
+                        font-size: 13px;
+                    }
+                }
+                &-button{
+                    margin: 0 100px 0 100px;
+                }
+               
             }
-            &-button{
-                margin: 0 100px 0 100px;
-            }
-           
+        }
+
+        &__paginator {
         }
     }
+
+    
 }

@@ -18,10 +18,9 @@ function joinProject($conn, $projectId, $userId){
     } 
 }
 
-function searchProjects($conn, $onlyUserProjects, $title, $userId){
-    // TODO hardcode
-    $query = "EXEC searchProjects @onlyUserProjects = ?, @title = ?, @userId = ?, @ofset = 0, @count = 10;";
-    $params = array($onlyUserProjects, $title, $userId);
+function searchProjects($conn, $onlyUserProjects, $title, $userId, $ofset, $count){
+    $query = "EXEC searchProjects @onlyUserProjects = ?, @title = ?, @userId = ?, @ofset = ?, @count = ?";
+    $params = array($onlyUserProjects, $title, $userId, intval($ofset), intval($count));
     $stmt = sqlsrv_query( $conn, $query, $params);
     if( $stmt === false ) {
         die( print_r( sqlsrv_errors(), true));

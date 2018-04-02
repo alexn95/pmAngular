@@ -1,6 +1,4 @@
 <div class="projects"> 
-    <div class="projects__panel">
-    </div>
     <div class="projects__search">
         <form [formGroup]="projectsSearchForm" (ngSubmit)="search()" class="projects__search__form">
             <button type="button" mat-icon-button (click)="createProject()">
@@ -20,24 +18,26 @@
             </mat-checkbox>
         </form>
     </div>
-    <div class="projects__list">
-        <button mat-button color="primary"  *ngFor="let project of projects"  
-                (click)="showProject(project)">
-            <div class="projects__list-item">
-                <span>{{project.title}} </span>
-                <mat-icon *ngIf="getUserRole(project) == 3" class="projects__list-item-icon"  color=""
-                    matTooltip="Your role: guest"  matTooltipPosition="above">account_box</mat-icon>
-                <mat-icon *ngIf="getUserRole(project) == 2" class="projects__list-item-icon" color="primary"
-                    matTooltip="Your role: user"  matTooltipPosition="above">account_box</mat-icon>
-                <mat-icon *ngIf="getUserRole(project) == 1"class="projects__list-item-icon" color="accent"
-                    matTooltip="Your role: creator"  matTooltipPosition="above">account_box</mat-icon>
-            </div>
-        </button>
-        <!-- <mat-paginator [length]="10"
-            [pageSize]="5"
+    <div class="projects__content">
+        <div class="projects__content__list">
+            <button mat-button color="primary"  *ngFor="let project of paginateProjects"  
+                    (click)="showProject(project)">
+                <div class="projects__content__list-item">
+                    <span>{{project.title}} </span>
+                    <mat-icon *ngIf="getUserRole(project) == 3" class="projects__content__list-item-icon"  color=""
+                        matTooltip="Your role: guest"  matTooltipPosition="above">account_box</mat-icon>
+                    <mat-icon *ngIf="getUserRole(project) == 2" class="projects__content__list-item-icon" color="primary"
+                        matTooltip="Your role: user"  matTooltipPosition="above">account_box</mat-icon>
+                    <mat-icon *ngIf="getUserRole(project) == 1"class="projects__content__list-item-icon" color="accent"
+                        matTooltip="Your role: creator"  matTooltipPosition="above">account_box</mat-icon>
+                </div>
+            </button>
+        </div>
+        <mat-paginator class="projects__content__paginator"
+            [length]="projectsConunt"
+            [pageSize]="paginatePageSize"
             (page)="pageEvent = $event">   
-        </mat-paginator> -->
-        <!-- <div *ngIf="pageEvent">
-        </div> -->
+        </mat-paginator>
     </div>
+    
 </div>

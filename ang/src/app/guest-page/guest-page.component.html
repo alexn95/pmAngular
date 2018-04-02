@@ -1,14 +1,19 @@
+<div class="guest-page">
 
-  guest-page works!
-  <div>
-      <button mat-button (click)="signup()">
-          Sign up
-       </button>
-  </div>
-  <div>
-      <button mat-button (click)="login()">
-          Log in
-       </button>
-  </div>
+    <span class="guest-page__greating">Welcome to Project Manager</span>
+    <span class="guest-page__info">To use our application you need to login</span>
+
+    <div class="guest-page__login">
+        <button mat-raised-button color="primary" (click)="login()">
+            Log in
+        </button>
+    </div>
+    <div class="guest-page__signup">
+        <button mat-raised-button color="primary" (click)="signup()">
+            Sign up
+        </button>
+    </div>
+ 
+</div>
   
 
