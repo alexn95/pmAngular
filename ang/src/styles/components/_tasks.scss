@@ -1,6 +1,7 @@
 .tasks {
     display: flex; 
     flex-direction: column;
+    flex: 1 1 auto;
 
     &__search {
         display: flex;
@@ -28,35 +29,40 @@
         flex-direction: column;
         justify-content: space-between;
 
-        &__accordin {
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
-            margin: 10px;
-            &-panel{
-                max-width: 1000px ;
-                width: 100%;
-                &-item{
-                    display: inline-flex;
-                    align-items: center;
-                }
-                &-info{
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-                    align-items: center;
-                    &-dete{
-                        color: rgba(0,0,0,0.54);
-                        font-size: 13px;
+        &__list {
+
+            &__accordin {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                margin: 10px;
+                &-panel{
+                    max-width: 1000px ;
+                    width: 100%;
+                    &-item{
+                        display: inline-flex;
+                        align-items: center;
                     }
+                    &-info{
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+                        &-dete{
+                            color: rgba(0,0,0,0.54);
+                            font-size: 13px;
+                        }
+                    }
+                    &-button{
+                        margin: 0 100px 0 100px;
+                    }
+                   
                 }
-                &-button{
-                    margin: 0 100px 0 100px;
-                }
-               
             }
         }
+
+        
 
         &__paginator {
         }

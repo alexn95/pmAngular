@@ -23,7 +23,6 @@ export class TaskService {
         data.append('onlyYourTask', String(onlyYourTask));
         data.append('ofset', String(ofset));
         data.append('count', String(count));
-        console.log(projId, title, state, onlyYourTask, ofset, count);
         return this.httpService.post('http://pm/tasks.php', data);
     }
 

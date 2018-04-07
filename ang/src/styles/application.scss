@@ -1,11 +1,30 @@
 @import './components/components.scss';
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
+html {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 body {
+    display: flex;
+    flex-direction: column;
     margin: 0;
+    flex: 1 1 auto;
 } 
 
+
 .main {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    
+    app-home {
+        display: flex;
+        flex-direction: column;
+        flex: 1 1 auto;
+    }
 
     &__guest-page {
     }
