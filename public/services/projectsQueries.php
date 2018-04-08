@@ -1,7 +1,7 @@
 <?php
 
 function leaveProject($conn, $projectId, $userId){
-    $query = "DELETE FROM users_projects WHERE users_projects.user_id = ? AND users_projects.project_id = ?";
+    $query = "EXEC leaveProject @userId = ?, @projectId = ?";
     $params = array($userId, $projectId);
     $stmt = sqlsrv_query( $conn, $query, $params);
     if( $stmt === false ) {
@@ -10,7 +10,7 @@ function leaveProject($conn, $projectId, $userId){
 }
 
 function joinProject($conn, $projectId, $userId){
-    $query = "INSERT INTO users_projects(user_id, project_id, role) VALUES (?, ?, 2)";
+    $query = "EXEC joinProject @userId = ?, @projectId = ?";
     $params = array($userId, $projectId);
     $stmt = sqlsrv_query( $conn, $query, $params);
     if( $stmt === false ) {
@@ -92,7 +92,7 @@ function saveNewProject($conn, $data){
 }
 
 function deleteProject($conn, $projectId){
-    $query = "DELETE FROM projects WHERE id = ?;";
+    $query = "EXEC deleteProject @projectId = ?";
     $stmt = sqlsrv_query( $conn, $query, [$projectId]);
     if( $stmt === false ) {
         die( print_r( sqlsrv_errors(), true));

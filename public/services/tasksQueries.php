@@ -2,9 +2,7 @@
  
 
 function getProjectUsers($conn, $projId){
-    $query = "SELECT [users].id, [login] FROM [users]
-            LEFT JOIN users_projects  ON users.id = users_projects.user_id
-            WHERE users_projects.project_id = ?";
+    $query = "SELECT * FROM getProjectUsers (?)";
     $params = array($projId);
     $stmt = sqlsrv_query( $conn, $query, $params);
     if( $stmt === false ) {
@@ -96,7 +94,7 @@ function searchTasks($conn, $projId, $title, $state, $userId, $onlyYourTask, $of
 }
 
 function deleteTask($conn, $taskId){
-    $query = "DELETE FROM tasks WHERE id = ?;";
+    $query = "EXEC deleteTask @taskId = ?";
     $stmt = sqlsrv_query( $conn, $query, [$taskId]);
     if( $stmt === false ) {
         die( print_r( sqlsrv_errors(), true));
@@ -104,7 +102,7 @@ function deleteTask($conn, $taskId){
 }
 
 function takeTask($conn, $taskId, $userId){
-    $query = "UPDATE tasks SET user_id = ? WHERE id = ?";
+    $query = "EXEC takeTask @userId = ?, @taskId = ?";
     $params = array($userId, $taskId);
     $stmt = sqlsrv_query( $conn, $query, $params);
     if( $stmt === false ) {
@@ -113,7 +111,7 @@ function takeTask($conn, $taskId, $userId){
 }
 
 function leaveTask($conn, $taskId){
-    $query = "UPDATE tasks SET user_id = null WHERE id = ?";
+    $query = "EXEC leaveTask @taskId = ?";
     $params = array($taskId);
     $stmt = sqlsrv_query( $conn, $query, $params);
     if( $stmt === false ) {
