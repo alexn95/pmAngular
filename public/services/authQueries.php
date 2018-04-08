@@ -29,7 +29,7 @@ function login($conn){
     $pass = $_POST['pass'];
 
     $query = "DECLARE @id INT, @status BIT;
-            EXECUTE auth ?, ?,
+            EXECUTE login ?, ?,
             @id = @id OUTPUT,
             @status = @status OUTPUT;
             SELECT @id id, @status status;";

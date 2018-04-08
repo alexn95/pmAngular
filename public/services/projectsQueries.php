@@ -34,8 +34,7 @@ function searchProjects($conn, $onlyUserProjects, $title, $userId, $ofset, $coun
 }
 
 function getProjectById($conn, $id){
-    $query = "SELECT projects.id, projects.title, [state] as project_state, description, create_date  FROM projects
-                WHERE projects.id = ?";
+    $query = "SELECT * FROM getProjectById (?)";
     $params = array($id);
     $stmt = sqlsrv_query( $conn, $query, $params);
     if( $stmt === false ) {
